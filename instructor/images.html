@@ -333,7 +333,19 @@
 <div class="accordion accordion-flush" id="accordionFlush10">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading10">
-        <a href="09-wrap-up.html">9. Wrap Up</a>
+        <a href="09-viewing-long-read-sequencing.html">9. Viewing Long-Read Sequencing Data</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush11">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading11">
+        <a href="10-wrap-up.html">10. Wrap Up</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -638,7 +650,57 @@ pairs”.</div>
 <p aria-hidden="true">Image 1 of 1: ‘IGV view of NA19240.bam at the APP locus after enabling View as pairs, showing a cluster of discordant reads’</p>
 <figure><img src="../fig/sv-09-hands-on-inversion-exercise.png" alt="IGV view of NA19240.bam at the APP locus after enabling View as pairs, showing a cluster of discordant reads" class="figure mx-auto d-block"><div class="figcaption">The resulting view: a cluster of
 discordantly-oriented reads confirms an inversion breakpoint.</div>
-</figure><hr></section><section id="09-wrap-up"><h2 class="section-heading"><a href="09-wrap-up.html">Wrap Up</a></h2>
+</figure><hr></section><section id="09-viewing-long-read-sequencing"><h2 class="section-heading"><a href="09-viewing-long-read-sequencing.html">Viewing Long-Read Sequencing Data</a></h2>
+<hr class="half-width">
+<h3 id="09-viewing-long-read-sequencing-figure-1">Figure 1</h3>
+<p aria-hidden="true">Image 1 of 1: ‘PacBio and Illumina alignments at the same locus, PacBio showing many more small mismatches/indels’</p>
+<figure><img src="../fig/longread-01-pacbio-illumina-comparison.png" alt="PacBio and Illumina alignments at the same locus, PacBio showing many more small mismatches/indels" class="figure mx-auto d-block"><div class="figcaption">The same locus sequenced with PacBio (long
+reads, top) and Illumina (short reads, bottom). The PacBio track is
+dense with small colored mismatch/indel marks — raw single-read errors —
+that the Illumina track does not show.</div>
+</figure><hr>
+<h3 id="09-viewing-long-read-sequencing-figure-2">Figure 2</h3>
+<p aria-hidden="true">Image 1 of 1: ‘PacBio alignments with small indels filtered out, closely resembling the Illumina track’</p>
+<figure><img src="../fig/longread-02-filtered-small-indels.png" alt="PacBio alignments with small indels filtered out, closely resembling the Illumina track" class="figure mx-auto d-block"><div class="figcaption">The same PacBio track with small indels hidden:
+the reads now look much closer to the clean Illumina track above
+it.</div>
+</figure><hr>
+<h3 id="09-viewing-long-read-sequencing-figure-3">Figure 3</h3>
+<p aria-hidden="true">Image 1 of 1: ‘PacBio alignments after enabling quick consensus mode, showing only consistent mismatches’</p>
+<figure><img src="../fig/longread-03-quick-consensus-mode.png" alt="PacBio alignments after enabling quick consensus mode, showing only consistent mismatches" class="figure mx-auto d-block"><div class="figcaption">Quick consensus mode applied to
+single-nucleotide mismatches: only consistent, likely-real mismatches
+remain visible.</div>
+</figure><hr>
+<h3 id="09-viewing-long-read-sequencing-figure-4">Figure 4</h3>
+<p aria-hidden="true">Image 1 of 1: ‘IGV Preferences dialog, Alignments tab, with indel and quick-consensus-mode options highlighted’</p>
+<figure><img src="../fig/longread-04-preferences-alignments-tab.png" alt="IGV Preferences dialog, Alignments tab, with indel and quick-consensus-mode options highlighted" class="figure mx-auto d-block"><div class="figcaption">The Alignments tab of IGV’s Preferences dialog:
+indel labeling/hiding thresholds and Quick consensus mode.</div>
+</figure><hr>
+<h3 id="09-viewing-long-read-sequencing-figure-5">Figure 5</h3>
+<p aria-hidden="true">Image 1 of 1: ‘IGV read-details popup showing read length, MAPQ score, and CIGAR string for a nanopore read’</p>
+<figure><img src="../fig/longread-06-simple-alignment-detail.png" alt="IGV read-details popup showing read length, MAPQ score, and CIGAR string for a nanopore read" class="figure mx-auto d-block"><div class="figcaption">A single long read’s details: read length ~17.9
+kb, MAPQ 11, and a CIGAR string full of insertion/deletion operations —
+typical of nanopore’s higher per-base error rate.</div>
+</figure><hr>
+<h3 id="09-viewing-long-read-sequencing-figure-6">Figure 6</h3>
+<p aria-hidden="true">Image 1 of 1: ‘IGV coverage and alignment view showing two heterozygous SNVs with a VCF track above’</p>
+<figure><img src="../fig/longread-05-simple-alignment.png" alt="IGV coverage and alignment view showing two heterozygous SNVs with a VCF track above" class="figure mx-auto d-block"><div class="figcaption">The variant sites and coverage track for the
+same locus: two heterozygous SNVs (red-highlighted), each recorded in
+the accompanying VCF.</div>
+</figure><hr>
+<h3 id="09-viewing-long-read-sequencing-figure-7">Figure 7</h3>
+<p aria-hidden="true">Image 1 of 1: ‘IGV view of a large deletion visible via split long reads, with a ClinVar VCF annotation track’</p>
+<figure><img src="../fig/longread-07-structural-variant-deletion.png" alt="IGV view of a large deletion visible via split long reads, with a ClinVar VCF annotation track" class="figure mx-auto d-block"><div class="figcaption">A 6 kb deletion, directly visible as reads whose
+alignment is interrupted then resumes past the deleted region; a ClinVar
+track (blue bars) shows this variant is already clinically
+annotated.</div>
+</figure><hr>
+<h3 id="09-viewing-long-read-sequencing-figure-8">Figure 8</h3>
+<p aria-hidden="true">Image 1 of 1: ‘IGV view of reads grouped by haplotype tag showing different insertion sizes between the two alleles at an FMR1 repeat expansion’</p>
+<figure><img src="../fig/longread-08-haplotype-phasing.png" alt="IGV view of reads grouped by haplotype tag showing different insertion sizes between the two alleles at an FMR1 repeat expansion" class="figure mx-auto d-block"><div class="figcaption">Reads colored and grouped by haplotype (HP) tag:
+one haplotype (top) carries a small insertion, the other (bottom) a much
+larger one, at a repeat expansion in FMR1.</div>
+</figure><hr></section><section id="10-wrap-up"><h2 class="section-heading"><a href="10-wrap-up.html">Wrap Up</a></h2>
 <hr class="half-width"></section>
 </div>
     </main>

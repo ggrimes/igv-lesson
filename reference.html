@@ -268,7 +268,16 @@
 <div class="accordion accordion-flush" id="accordionFlush10">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading10">
-        <a href="09-wrap-up.html">9. Wrap Up</a>
+        <a href="09-viewing-long-read-sequencing.html">9. Viewing Long-Read Sequencing Data</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush11">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading11">
+        <a href="10-wrap-up.html">10. Wrap Up</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -427,6 +436,18 @@ inter-chromosomal fusion.</li>
 <li>Same-strand (forward-forward or reverse-reverse) discordant pairs
 indicate an inversion; right-click alignments and select <strong>View as
 pairs</strong> to see pair relationships clearly.</li>
+</ul></section><section><h2 class="section-heading" id="viewing-long-read-sequencing-data"><a href="09-viewing-long-read-sequencing.html">Viewing Long-Read
+Sequencing Data</a><a class="anchor" aria-label="anchor" href="#viewing-long-read-sequencing-data"></a></h2>
+<hr class="half-width"><ul><li>
+<strong>View &gt; Preferences &gt; Alignments</strong>: indel hiding
+thresholds and <strong>Quick consensus mode</strong> filter raw
+long-read errors so consensus signal is easier to see.</li>
+<li>MAPQ (0–255) reflects alignment confidence; low MAPQ is a warning
+sign for any variant called from that read.</li>
+<li>A single long read can reveal a structural variant directly by
+splitting across its breakpoint.</li>
+<li>Color/group reads by <code>HP</code> (haplotype) tag to separate two
+phased alleles for comparison.</li>
 </ul></section><section><h2 class="section-heading" id="glossary">Glossary<a class="anchor" aria-label="anchor" href="#glossary"></a></h2>
 <hr class="half-width"><dl><dt>BAM</dt>
 <dd>
@@ -464,6 +485,11 @@ A plain-text format for nucleotide or protein sequences.
 <dd>
 The specific allele(s) an individual sample carries at a variant site.
 </dd>
+<dt>Haplotype tag (HP)</dt>
+<dd>
+A BAM tag assigned by a phasing tool (e.g. WhatsHap, LongPhase) that
+labels which parental haplotype a read belongs to.
+</dd>
 <dt>Insert size</dt>
 <dd>
 The distance spanned by a paired-end fragment, from the outer edge of
@@ -488,6 +514,12 @@ positioned against.
 <dd>
 An IGV visualization combining exon coverage and splice-junction reads
 for RNA-seq data.
+</dd>
+<dt>Split read</dt>
+<dd>
+A single sequencing read whose parts align to two different locations
+(or orientations) in the reference, often evidence of a structural
+variant breakpoint.
 </dd>
 <dt>Splice junction</dt>
 <dd>

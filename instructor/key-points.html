@@ -333,7 +333,19 @@
 <div class="accordion accordion-flush" id="accordionFlush10">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading10">
-        <a href="09-wrap-up.html">9. Wrap Up</a>
+        <a href="09-viewing-long-read-sequencing.html">9. Viewing Long-Read Sequencing Data</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush11">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading11">
+        <a href="10-wrap-up.html">10. Wrap Up</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -505,7 +517,23 @@ clustered at the fusion junction.</li>
 <li>An inversion shows up as same-strand (forward-forward or
 reverse-reverse) discordant pairs at its two breakpoints; right-click
 <strong>View as pairs</strong> to see this clearly.</li>
-</ul></section><section id="09-wrap-up"><h2 class="section-heading"><a href="09-wrap-up.html">Wrap Up</a></h2>
+</ul></section><section id="09-viewing-long-read-sequencing"><h2 class="section-heading"><a href="09-viewing-long-read-sequencing.html">Viewing Long-Read Sequencing Data</a></h2>
+<hr class="half-width">
+<ul>
+<li>Long reads (PacBio, Oxford Nanopore) trade a higher per-read error
+rate for much greater length than short Illumina reads.</li>
+<li>IGV’s <strong>quick consensus mode</strong> and indel-hiding
+thresholds (<strong>View &gt; Preferences &gt; Alignments</strong>)
+filter raw long-read noise so consensus signal is easier to see.</li>
+<li>A read’s MAPQ score (0–255) reflects alignment confidence; low MAPQ
+is a warning sign for any variant called from that read.</li>
+<li>A single long read can directly reveal a structural variant by
+splitting across its breakpoint, without needing paired-end
+evidence.</li>
+<li>Coloring and grouping reads by haplotype (<code>HP</code>) tag
+separates two alleles for direct comparison, useful for phased variants
+and repeat expansions.</li>
+</ul></section><section id="10-wrap-up"><h2 class="section-heading"><a href="10-wrap-up.html">Wrap Up</a></h2>
 <hr class="half-width">
 <ul>
 <li>The core IGV workflow — load a genome and tracks, navigate to a
