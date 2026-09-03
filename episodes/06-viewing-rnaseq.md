@@ -161,6 +161,16 @@ one tissue's dominant transcript, but skipped in the other's).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Watch: IGV RNA-seq Data Basics and Advanced
+
+<iframe style="width:100%;max-width:560px;aspect-ratio:16/9;" src="https://www.youtube.com/embed/awGN-rpLYas" title="IGV | RNA-Seq Data Basics | Splice Junction Track, Downsampling" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<iframe style="width:100%;max-width:560px;aspect-ratio:16/9;" src="https://www.youtube.com/embed/dx9-N8b9Yj4" title="IGV | RNA-Seq Data Advanced | Alternative Splicing, Sashimi Plots" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - RNA-seq reads come from spliced mRNA (introns already removed), so a read

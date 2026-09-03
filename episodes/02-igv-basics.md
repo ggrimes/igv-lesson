@@ -220,6 +220,17 @@ between two separate tracks.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Watch: IGV Data Navigation Basics
+
+If you would rather watch these navigation basics demonstrated than read
+about them, the IGV team's official tutorial video covers the same ground:
+
+<iframe style="width:100%;max-width:560px;aspect-ratio:16/9;" src="https://www.youtube.com/embed/YpNg0hNUuo8" title="IGV | Data Navigation Basics" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Load a reference genome first, then load data tracks with **File > Load
