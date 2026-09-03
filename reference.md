@@ -71,6 +71,16 @@ title: 'Reference'
 - Right-click genotypes for **Group By…** (a sample attribute, e.g.
   population), **Display Mode**, **Color By**, and sort options.
 
+## [Viewing Structural Variants](../episodes/08-viewing-structural-variants.md)
+
+- A larger-than-expected inferred insert size (colored red) indicates a
+  deletion; a coverage drop appears between the two breakpoints.
+- Reads colored by an unexpected mate chromosome indicate an
+  inter-chromosomal fusion.
+- Same-strand (forward-forward or reverse-reverse) discordant pairs indicate
+  an inversion; right-click alignments and select **View as pairs** to see
+  pair relationships clearly.
+
 ## Glossary
 
 BAM
@@ -104,6 +114,10 @@ Genotype
 Insert size
 :    The distance spanned by a paired-end fragment, from the outer edge of
      one read to the outer edge of its mate.
+
+Inversion
+:    A structural variant in which a segment of the genome is reversed in
+     orientation between two breakpoints.
 
 Mapping quality
 :    A score reflecting how confident an aligner is that a read is placed at
