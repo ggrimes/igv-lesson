@@ -5,6 +5,15 @@ Jim Robinson, Helga Thorvaldsdottir. Introduction to the Integrative
 Genomics Viewer (IGV). BroadE Workshop, Broad Institute, April 2017.
 https://www.igv.org/workshops/BroadApril2017/
 
+The optional "Viewing Long-Read Sequencing Data" episode also adapts
+examples and figures from:
+
+Sirisha Hesketh. A guide to reviewing BAM files. EPI2ME Blog, Oxford
+Nanopore Technologies, March 2024.
+https://epi2me.nanoporetech.com/reviewing-bam/
+Note: the screenshots reused from this post remain (c) Oxford Nanopore
+Technologies plc and are not covered by this lesson's CC-BY license.
+
 If you use IGV itself (the software) in published work, please cite it as
 recommended at https://igv.org/, currently:
 

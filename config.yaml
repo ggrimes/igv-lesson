@@ -67,7 +67,8 @@ episodes:
 - 06-viewing-rnaseq.md
 - 07-viewing-variants.md
 - 08-viewing-structural-variants.md
-- 09-wrap-up.md
+- 09-viewing-long-read-sequencing.md
+- 10-wrap-up.md
 
 # Information for Learners
 learners:

@@ -12,12 +12,17 @@ unless you have build in extra time for it.
 
 Episodes 1–2 need an internet connection (they load example data from the
 IGV server). Episodes 3–5, 7, and 8 use only local files. Episode 6 needs an
-internet connection again for the hosted RNA-seq tutorial data.
+internet connection again for the hosted RNA-seq tutorial data. Episode 9
+uses no data at all — it is discussion/demonstration based, walking through
+published screenshots rather than a hands-on exercise.
 
 ## Pacing advice
 
-It is fine not to get through every episode. If time is short, the episodes
-most worth cutting (in order) are:
+It is fine not to get through every episode.
+[Viewing Long-Read Sequencing Data](../episodes/09-viewing-long-read-sequencing.md)
+is explicitly optional — cover it only if time allows, since it does not use
+the workshop data and is not needed for any later episode. If time is short
+beyond that, the episodes most worth cutting (in order) are:
 
 1. [Loading Your Own Genome](../episodes/03-loading-your-own-genome.md) — can
   be skipped if learners will only ever use IGV's built-in hosted genomes.
