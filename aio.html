@@ -593,7 +593,7 @@ something like <code>Human hg19</code>.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>If IGV opens and shows a genome selection drop-down, a chromosome
 ideogram, and an empty track area below it, you are ready for the rest
@@ -788,7 +788,7 @@ in the sequence track.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Typing <code>NRAS</code> into the search box and clicking
 <strong>Go</strong> takes you directly to the gene, at a zoom level that
@@ -851,7 +851,7 @@ modes?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p><strong>Collapsed</strong> draws all transcripts on one line
 (compact, but you cannot tell transcripts apart).
@@ -903,7 +903,7 @@ source tracks?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>The combined (“Sum”) track shows a peak wherever <em>either</em>
 source track has a peak, with the height reflecting the total signal
@@ -1943,7 +1943,7 @@ population group?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>No — the variants at this locus are not evenly distributed. They are
 absent, or nearly absent, in some population groups, and much more
@@ -2119,6 +2119,28 @@ Session…</strong>, navigate to <code>igvData/svs/</code>, and open
 genome, the alignment file <code>NA19240.bam</code>, and jumps straight
 to <code>chr21:26,000,000-26,004,000</code> — the <em>APP</em>
 locus.</p>
+<div id="who-is-na19240" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="who-is-na19240" class="callout-inner">
+<h3 class="callout-title">Who is NA19240?</h3>
+<div class="callout-content">
+<p><code>NA19240</code> is a well-characterized human lymphoblastoid
+cell line (a B-lymphocyte line immortalized with Epstein-Barr virus)
+from a Yoruba woman from Ibadan, Nigeria. She is the child in one of the
+trios (alongside her parents, <code>NA19238</code> and
+<code>NA19239</code>) sequenced by the International HapMap Project and
+later the 1000 Genomes Project. Because her genome has been sequenced
+and validated so extensively — including as a parent-child trio, which
+lets structural variant calls be cross-checked for Mendelian consistency
+— <code>NA19240</code> is widely reused as a reference/benchmarking
+sample across genomics and sequencing-technology studies, including this
+one.</p>
+</div>
+</div>
+</div>
 <p>Right-click on the alignments and select <strong>View as
 pairs</strong>.</p>
 <figure><img src="fig/sv-08-view-as-pairs-menu.png" alt="Right-click context menu with View as pairs highlighted" class="figure mx-auto d-block"><div class="figcaption">Right-click the alignments and select “View as
