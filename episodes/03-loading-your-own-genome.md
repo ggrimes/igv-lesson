@@ -81,7 +81,7 @@ can match the gene name against the annotation track and jump straight to it.
 ## Where do gene annotation files come from?
 
 The `refSeq_chr1.bed` file used here was generated from the
-[UCSC Table Browser](http://genome.ucsc.edu/cgi-bin/hgTables), a web tool for
+[UCSC Table Browser](https://genome.ucsc.edu/cgi-bin/hgTables), a web tool for
 retrieving data associated with a genome assembly (gene models, regulatory
 regions, and more) as a downloadable file. This is a common way to obtain a
 gene annotation track for a genome that is not already bundled with one.
