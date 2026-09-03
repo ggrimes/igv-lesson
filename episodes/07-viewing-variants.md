@@ -1,6 +1,6 @@
 ---
 title: Viewing Variants and Genotypes
-teaching: 10
+teaching: 15
 exercises: 20
 ---
 
@@ -8,6 +8,7 @@ exercises: 20
 
 - Load a multi-sample VCF file together with its sample metadata.
 - Distinguish the variant sites panel from the per-sample genotypes panel.
+- Interpret the allele and genotype color coding IGV uses.
 - Group and compare genotypes across sample populations.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -65,10 +66,38 @@ Hover over a variant site or a genotype cell to see its details in a popup.
 (If you changed the popup behavior earlier to "on click", click instead of
 hovering.)
 
+Both panels use color to summarize a lot of information at a glance:
+
+- In the **variant sites** panel, blue marks the reference allele and red
+  marks the alternate allele at each site.
+
+  ![Zoomed-in variant sites: blue squares are the reference allele, red squares are the alternate allele.](fig/variants-03-allele-color-legend.png){alt='Variant sites colored blue for reference allele and red for alternate allele'}
+
+- In the **genotypes** panel, cyan marks a homozygous (alternate/alternate)
+  genotype, blue marks heterozygous (reference/alternate), and grey marks
+  homozygous reference.
+
+  ![Zoomed-in genotypes: cyan for homozygous alternate, blue for heterozygous, grey for homozygous reference.](fig/variants-04-genotype-color-legend.png){alt='Genotypes colored cyan for homozygous, blue for heterozygous, grey for reference'}
+
 A narrow **sample information** column to the left of the genotypes uses
 color to represent each sample's metadata (e.g. population). Samples sharing
 the same value are shown in the same color. Try clicking on the sample
 information column headers to sort samples by an attribute.
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Where does the sample information come from?
+
+Sample metadata is defined in an auxiliary tab-delimited file, separate from
+the VCF itself: the first row names the metadata columns (e.g. `sample`,
+`pop`, `super_pop`, `gender`), and the first column holds sample names that
+must exactly match the sample names in the VCF. The pre-built session you
+loaded already references this file, but you can add the same kind of
+sample-information file to your own VCF tracks.
+
+![An example sample-information file: one row per sample, with a `sample` column matching the VCF's sample names and additional metadata columns.](fig/variants-05-sample-info-file-format.png){alt='Tab-delimited sample information file with sample, pop, super_pop, and gender columns'}
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Highlight variants in a gene of interest
 
@@ -125,8 +154,11 @@ sample attribute.
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - A VCF track in IGV has a variant sites panel and a per-sample genotypes
-  panel; a sample information color bar can show sample metadata such as
-  population.
+  panel; a sample information color bar (driven by an auxiliary tab-delimited
+  file) can show sample metadata such as population.
+- Variant sites are colored blue (reference allele) / red (alternate allele);
+  genotypes are colored grey (homozygous reference) / blue (heterozygous) /
+  cyan (homozygous alternate).
 - Search for a variant using `gene:protein-change` syntax (e.g.
   `APOL1:S342G`) as well as by coordinate or gene name.
 - Grouping genotypes by a sample attribute (e.g. population) makes it easy to

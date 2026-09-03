@@ -19,6 +19,9 @@ title: 'Reference'
   directly to it.
 - Right-click a gene track for **Collapsed** / **Expanded** / **Squished**
   display modes.
+- **Genomes > More…** adds other IGV-hosted genomes to the drop-down menu.
+- **Tools > Combine Data Tracks** adds, subtracts, multiplies, or divides two
+  numeric tracks into a new derived track.
 
 ## [Loading Your Own Genome](../episodes/03-loading-your-own-genome.md)
 
@@ -35,8 +38,10 @@ title: 'Reference'
 - Right-click aligned reads for **Sort alignments by** (e.g. base, read
   strand) and **Color alignments by** (e.g. read strand) options.
 - Warning signs of a false-positive variant: low base quality (shaded
-  mismatches) and a mismatch confined to one strand in a non-strand-specific
-  library.
+  mismatches), a mismatch confined to one strand in a non-strand-specific
+  library, and (via BLAT) many equally-good alternative alignments elsewhere.
+- **Tools > BLAT…**, or right-click a read and choose **BLAT read
+  sequence**, checks whether a read/feature aligns uniquely.
 
 ## [Precomputing Coverage with igvtools](../episodes/05-precomputing-coverage.md)
 
@@ -56,6 +61,11 @@ title: 'Reference'
 ## [Viewing Variants and Genotypes](../episodes/07-viewing-variants.md)
 
 - A VCF track has a variant sites panel and a per-sample genotypes panel.
+- Variant sites: blue = reference allele, red = alternate allele. Genotypes:
+  grey = homozygous reference, blue = heterozygous, cyan = homozygous
+  alternate.
+- Sample metadata comes from an auxiliary tab-delimited file (header row of
+  attribute names, first column of sample names matching the VCF).
 - Search using `gene:protein-change` (e.g. `APOL1:S342G`) as well as by
   coordinate or gene name.
 - Right-click genotypes for **Group By…** (a sample attribute, e.g.
@@ -70,6 +80,14 @@ BAM
 BED
 :    A simple tab-delimited format for genomic intervals/features.
 
+BLAT
+:    An alignment search tool used in IGV to check whether a read or feature
+     sequence aligns uniquely, or almost as well to other locations.
+
+CIGAR string
+:    A compact code in a SAM/BAM record describing how a read's bases align
+     against the reference (matches, insertions, deletions).
+
 Coverage
 :    The number of aligned reads overlapping each position in the genome.
 
@@ -82,6 +100,14 @@ FASTA
 
 Genotype
 :    The specific allele(s) an individual sample carries at a variant site.
+
+Insert size
+:    The distance spanned by a paired-end fragment, from the outer edge of
+     one read to the outer edge of its mate.
+
+Mapping quality
+:    A score reflecting how confident an aligner is that a read is placed at
+     the correct genomic location.
 
 Reference genome
 :    The assembled genome sequence that reads, genes, and variants are

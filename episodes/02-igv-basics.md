@@ -1,7 +1,7 @@
 ---
 title: IGV Basics
-teaching: 10
-exercises: 30
+teaching: 15
+exercises: 35
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives
@@ -10,6 +10,7 @@ exercises: 30
 - Navigate between whole-genome, chromosome, and base-pair resolution views.
 - Jump directly to a genomic locus or gene by name.
 - Interpret the reference sequence track and the gene annotation track.
+- Combine two numeric tracks with a simple arithmetic operation.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -29,6 +30,19 @@ need an internet connection.
 Click the genome drop-down menu in the upper left corner of IGV and select
 **Human hg19**. (If you only see **Human hg18** in the menu, that is fine —
 select that instead.)
+
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## More hosted genomes
+
+The genome menu is short the first time you install IGV, but IGV hosts
+dozens of genomes beyond human. Select **More…** from the genome drop-down
+menu to browse and add other hosted genomes (bacteria, model organisms, other
+builds, and more) to your menu.
+
+![The full list of genomes IGV hosts, opened via "More…" in the genome drop-down menu.](fig/basics-08-more-hosted-genomes.png){alt='Genomes to add to list dialog with dozens of hosted genomes'}
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Load data from the IGV server
 
@@ -166,15 +180,58 @@ letting you fit many transcripts in a small space at the cost of readability.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Combining numeric data tracks
+
+IGV can combine two numeric (signal) tracks with a simple arithmetic
+operation, which is useful for comparing or normalizing tracks without
+leaving IGV. Select **Tools > Combine Data Tracks**.
+
+![Selecting Tools > Combine Data Tracks with four loaded ChIP-seq signal tracks.](fig/basics-05-combine-tracks-menu.png){alt='Tools menu with Combine Data Tracks highlighted'}
+
+In the dialog, pick **Track A** and **Track B** from the loaded numeric
+tracks (for example, two of the ChIP-seq tracks you loaded earlier), choose
+an **Operation** (Add, Subtract, Multiply, or Divide), and name the result.
+
+![The Combine Data Tracks dialog: pick two tracks, an operation, and a name for the result.](fig/basics-06-combine-tracks-dialog.png){alt='Combine Data Tracks dialog with Track A, Operation, Track B, and Result Track Name fields'}
+
+IGV adds a new track computed from the two source tracks at every position.
+
+![A new "Sum" track (Track A + Track B) added below the two source tracks.](fig/basics-07-combine-tracks-result.png){alt='New combined track showing the sum of two ChIP-seq tracks'}
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Combine two of the loaded ChIP-seq tracks
+
+Using the four ENCODE ChIP-seq tracks loaded earlier in this episode, add
+two of them together with **Tools > Combine Data Tracks**. How does the
+combined track's shape compare to its two source tracks?
+
+:::::::::::::::  solution
+
+## Solution
+
+The combined ("Sum") track shows a peak wherever *either* source track has a
+peak, with the height reflecting the total signal from both tracks at that
+position. This kind of combination is useful, for example, to see a
+combined read-density signal without switching your eyes back and forth
+between two separate tracks.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
 - Load a reference genome first, then load data tracks with **File > Load
-  from Server…** or **File > Load from File…**.
+  from Server…** or **File > Load from File…**; use **Genomes > More…** to
+  add other hosted genomes beyond the default.
 - IGV supports four broad zoom levels: whole genome, chromosome, region, and
   base-pair resolution; drag on the ruler, double-click a track, or use the
   search box to move between them.
 - The sequence track shows the reference genome and, optionally, a 3-frame
   translation; the gene track shows exons, introns, and UTRs, and can be
   displayed collapsed, expanded, or squished.
+- **Tools > Combine Data Tracks** lets you add, subtract, multiply, or divide
+  two numeric tracks into a new derived track.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::

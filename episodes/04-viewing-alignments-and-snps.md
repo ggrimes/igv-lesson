@@ -1,7 +1,7 @@
 ---
 title: Viewing Alignments and SNPs
-teaching: 10
-exercises: 25
+teaching: 15
+exercises: 30
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives
@@ -11,6 +11,8 @@ exercises: 25
 - Read mismatched bases, coverage, and allele counts from an alignment track.
 - Sort and color aligned reads to help distinguish real variants from
   artifacts.
+- Use BLAT to check whether a suspicious signal is a genuine mapping or a
+  multi-mapping artifact.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -19,8 +21,32 @@ exercises: 25
 - How do I inspect individual sequencing reads that support a candidate
   variant?
 - How can I tell a real SNP apart from a technical artifact?
+- What does a BAM alignment record actually contain?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Background: paired-end sequencing and the BAM format
+
+The alignment file you will load in this episode comes from paired-end
+Illumina sequencing: each DNA fragment is read from both ends, producing two
+reads (Read 1 and Read 2) separated by an unsequenced gap. The distance
+between the two reads' outer edges is the **insert size**.
+
+![Single-end vs. paired-end reads, and the relationship between read length, inner distance, and insert size.](fig/snps-00-ngs-paired-end.png){alt='Diagram of single-end and paired-end sequencing reads aligned to a reference sequence'}
+
+Aligned reads are stored in **SAM/BAM** format (Sequence Alignment/Binary
+Alignment Map — BAM is just a compressed, indexed binary encoding of SAM).
+Each alignment record includes the read name, its mapping position, a
+mapping quality score, a **CIGAR string** describing matches/insertions/
+deletions along the alignment, information about its paired mate, and the
+read's sequence and per-base quality scores.
+
+![An example SAM file: a header describing the reference, followed by one alignment record per line, with columns for read name, position, mapping quality, CIGAR string, mate info, and sequence.](fig/snps-00-sambam-format.png){alt='Annotated example of SAM format fields'}
+
+You do not need to read SAM/BAM records by hand to use IGV — this is what
+IGV's alignment track visualizes for you — but recognizing these terms
+(insert size, mapping quality, CIGAR) will help you make sense of the popups
+and sort/color options used throughout this episode.
 
 ## Reference genome
 
@@ -145,8 +171,61 @@ evidence against it being real.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Using BLAT to check a suspicious signal
+
+Sorting and coloring reads tells you a lot, but sometimes a coverage peak or
+a cluster of mismatches is suspicious for a different reason: the reads
+underneath it might not belong there at all. **BLAT** (`Tools > BLAT…`) lets
+you take a read's sequence (or any feature, or a sequence you type in) and
+search a BLAT server for alternative places it could align in the genome.
+
+![An unusually narrow coverage spike — worth checking whether it is a unique alignment or a mapping artifact.](fig/snps-04-blat-investigate-peak.png){alt='A narrow coverage peak circled for investigation'}
+
+Right-click on a read at the locus you want to check and select **BLAT read
+sequence**.
+
+![Right-click a read and select "Blat read sequence" from the alignment track's context menu.](fig/snps-05-blat-read-sequence-menu.png){alt='Right-click context menu with Blat read sequence highlighted'}
+
+BLAT returns every place in the genome the sequence aligns well, ranked by
+score.
+
+![BLAT results for one read: many alternative alignments across different chromosomes with similar scores.](fig/snps-06-blat-results-many-hits.png){alt='BLAT results table showing many alternative alignments with similar scores'}
+
+If BLAT returns one clearly best-scoring hit at the expected locus, the
+alignment is trustworthy. If it instead returns **many alternative
+alignments with similar scores** scattered across the genome — as in the
+example above — the read comes from a repetitive sequence that maps almost
+equally well to many locations, and the signal at your original locus should
+be treated with suspicion rather than taken as strong evidence for a variant.
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## When would BLAT change your conclusion?
+
+You already found two independent warning signs against `snp2` being a real
+variant (low base quality, strand bias). Suppose BLAT on a `snp2` read had
+instead returned dozens of equally good alternative alignments elsewhere in
+the genome. Would that change your confidence, and why?
+
+:::::::::::::::  solution
+
+## Solution
+
+It would add a third, independent line of evidence against `snp2`: reads
+that multi-map almost equally well to many locations cannot be confidently
+placed at any single locus, so any "variant" called from them is likely an
+artifact of ambiguous mapping rather than a true difference from the
+reference genome at that specific position.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
+- Aligned reads are stored in SAM/BAM format; recognizing terms like insert
+  size, mapping quality, and CIGAR string helps you interpret what IGV shows
+  you.
 - Load a BAM file with **File > Load from File…**; IGV finds its `.bai`
   index automatically as long as it is named correctly and kept alongside the
   BAM file.
@@ -155,5 +234,8 @@ evidence against it being real.
   alignment artifact.
 - Warning signs of a false-positive variant include low base quality and a
   mismatch that only appears on reads from one strand when it should not.
+- **Tools > BLAT…** (or right-click a read and choose **BLAT read
+  sequence**) checks whether a read aligns uniquely or is a multi-mapping
+  artifact from a repetitive region.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::

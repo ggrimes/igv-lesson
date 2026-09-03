@@ -25,8 +25,9 @@ Across this lesson you have:
   local FASTA file,
 - navigated between whole-genome, chromosome, region, and base-pair
   resolution views,
-- inspected aligned sequencing reads and used sorting/coloring to distinguish
-  a likely real SNP from a likely artifact,
+- combined two numeric tracks with a simple arithmetic operation,
+- inspected aligned sequencing reads and used sorting, coloring, and BLAT to
+  distinguish a likely real SNP from a likely artifact,
 - precomputed coverage data with `igvtools` so it remains visible at every
   zoom level,
 - explored RNA-seq coverage, splice junctions, and Sashimi plots to identify
@@ -58,6 +59,10 @@ IGV can display.
 - **The full IGV user guide.** <https://igv.org/doc/desktop/> documents every
   track type and display option, well beyond what a single workshop can
   cover.
+- **Video tutorials.** The [IGV YouTube channel](https://www.youtube.com/@IGVtutorials)
+  has short, focused videos on specific features (data navigation, sequencing
+  data, VCF files, RNA-seq) if you would rather watch a feature demonstrated
+  than read about it.
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
