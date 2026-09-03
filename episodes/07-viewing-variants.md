@@ -20,6 +20,29 @@ exercises: 20
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Why this dataset?
+
+The VCF session you will load contains variant calls on human chromosome 22
+for about 850 people sampled from populations around the world — a subset of
+the [1000 Genomes Project](https://www.internationalgenome.org/) dataset.
+
+![The example dataset: variant calls on chromosome 22 for roughly 850 people from populations around the world.](fig/variants-00-the-data.png){alt='Chromosome 22 and a world map marking sampled populations'}
+
+Zoomed in on the *APOL1* gene, one particular marker, `rs9622363`, tells a
+striking evolutionary story.
+
+![Background on the APOL1 variant explored later in this episode: it is found almost exclusively on African chromosomes and is strongly associated with kidney disease.](fig/variants-00-apol1-background.png){alt='APOL1 background slide: African-specific variant associated with kidney disease and trypanolytic activity'}
+
+*APOL1* encodes a protein that can lyse the parasite that causes African
+sleeping sickness, and coding variants in the gene — found almost
+exclusively on chromosomes of African ancestry — strengthen that protective
+effect. But the same variants come at a cost: Genovese and colleagues showed
+they are also strongly associated with elevated rates of kidney disease in
+African Americans (Genovese *et al.*, "Association of Trypanolytic ApoL1
+Variants with Kidney Disease in African Americans," *Science*, 2010). This is
+exactly the kind of population-specific signal you will be able to spot for
+yourself later in this episode by grouping genotypes by population.
+
 ## Load the session
 
 This exercise uses a pre-built IGV session that loads a population VCF file
@@ -77,11 +100,12 @@ created. Is this variant equally common in every population group?
 
 No — the variants at this locus are not evenly distributed. They are absent,
 or nearly absent, in some population groups, and much more prevalent in
-others. This kind of population-stratified pattern is common for variants
-under different selective pressures (or genetic drift) in different
-ancestral populations, and grouping genotypes by population makes this kind
-of pattern immediately visible, without needing to compute allele
-frequencies separately for each group.
+others, consistent with the African-specific selective history of *APOL1*
+variants described earlier in this episode. This kind of population-stratified
+pattern is common for variants under different selective pressures (or
+genetic drift) in different ancestral populations, and grouping genotypes by
+population makes this kind of pattern immediately visible, without needing to
+compute allele frequencies separately for each group.
 
 :::::::::::::::::::::::::
 
