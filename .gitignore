@@ -1,0 +1,19 @@
+# sandpaper files
+episodes/*html
+site/*
+!site/README.md
+
+# History files
+.Rhistory
+.Rapp.history
+.RData
+.Ruserdata
+
+# RStudio files
+.Rproj.user/
+
+# renv detritus
+renv/sandbox/
+
+*~
+.DS_Store

@@ -95,7 +95,9 @@ over a junction track (or the alignments) and select **Sashimi Plot**. If
 prompted to select alignment tracks, verify that both **heart** and
 **liver** are checked, and click **OK**.
 
-![A Sashimi plot: arcs represent reads spanning exon junctions, and peaks represent exon coverage, for two tissues.](fig/rnaseq-03-sashimi-plot.png){alt='Sashimi plot for heart and liver samples'}
+![Comparing the alternative splicing pattern between tissues, then opening a Sashimi plot from the right-click menu.](fig/rnaseq-03-alt-splicing-open-sashimi.png){alt='Right-click menu for opening a Sashimi Plot, with a dialog to select the heart and liver alignment tracks'}
+
+![The resulting Sashimi plot: arcs represent reads spanning exon junctions, and peaks represent exon coverage, for two tissues.](fig/rnaseq-04-sashimi-plot.png){alt='Sashimi plot for heart and liver samples showing junction arcs and coverage peaks'}
 
 In a Sashimi plot:
 
