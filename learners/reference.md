@@ -1,0 +1,108 @@
+---
+title: 'Reference'
+---
+
+## Reference
+
+## [Introduction to IGV](../episodes/01-introduction.md)
+
+- IGV is a free desktop genome browser that runs locally and supports many
+  file formats (FASTA, BED, BAM, TDF, VCF, and more).
+
+## [IGV Basics](../episodes/02-igv-basics.md)
+
+- **File > Load from Server…** loads example data hosted by the IGV team.
+- Zoom levels: whole genome (**All**) → chromosome → region → base pair.
+- Click-and-drag on the ruler to zoom into a region; double-click a track to
+  zoom to a point (<kbd>Alt</kbd>-click to zoom out).
+- Type a locus or gene name into the search box and click **Go** to jump
+  directly to it.
+- Right-click a gene track for **Collapsed** / **Expanded** / **Squished**
+  display modes.
+
+## [Loading Your Own Genome](../episodes/03-loading-your-own-genome.md)
+
+- **Genomes > Load Genome from File…** loads a reference sequence (FASTA).
+- **File > Load from File…** loads any other local track (e.g. a BED
+  annotation file).
+- A genome loaded from a bare FASTA has no gene names or cytoband ideogram
+  until you add annotation tracks yourself.
+
+## [Viewing Alignments and SNPs](../episodes/04-viewing-alignments-and-snps.md)
+
+- IGV finds a BAM's `.bai` index automatically if it is named correctly and
+  kept alongside the BAM file — never load the `.bai` directly.
+- Right-click aligned reads for **Sort alignments by** (e.g. base, read
+  strand) and **Color alignments by** (e.g. read strand) options.
+- Warning signs of a false-positive variant: low base quality (shaded
+  mismatches) and a mismatch confined to one strand in a non-strand-specific
+  library.
+
+## [Precomputing Coverage with igvtools](../episodes/05-precomputing-coverage.md)
+
+- **Tools > Run igvtools… > Count** precomputes a `.tdf` coverage summary for
+  a BAM file.
+- Right-click a coverage track and select **Load pre-computed coverage
+  data…** to attach a `.tdf` file.
+
+## [Viewing RNA-seq Data](../episodes/06-viewing-rnaseq.md)
+
+- **View > Preferences > Alignments > Splice Junction Track** enables
+  junction arcs for RNA-seq BAM tracks.
+- Right-click a junction/alignment track and select **Sashimi Plot** for a
+  combined coverage + junction view; **Set Junction Coverage Min** filters
+  out low-count junctions.
+
+## [Viewing Variants and Genotypes](../episodes/07-viewing-variants.md)
+
+- A VCF track has a variant sites panel and a per-sample genotypes panel.
+- Search using `gene:protein-change` (e.g. `APOL1:S342G`) as well as by
+  coordinate or gene name.
+- Right-click genotypes for **Group By…** (a sample attribute, e.g.
+  population), **Display Mode**, **Color By**, and sort options.
+
+## Glossary
+
+BAM
+:    Binary Alignment/Map format; stores aligned sequencing reads. Requires a
+     `.bai` index file for random access.
+
+BED
+:    A simple tab-delimited format for genomic intervals/features.
+
+Coverage
+:    The number of aligned reads overlapping each position in the genome.
+
+Cytoband
+:    A stained-banding pattern used to represent chromosome structure at low
+     zoom levels.
+
+FASTA
+:    A plain-text format for nucleotide or protein sequences.
+
+Genotype
+:    The specific allele(s) an individual sample carries at a variant site.
+
+Reference genome
+:    The assembled genome sequence that reads, genes, and variants are
+     positioned against.
+
+Sashimi plot
+:    An IGV visualization combining exon coverage and splice-junction reads
+     for RNA-seq data.
+
+Splice junction
+:    The point where two exons are joined together after intron removal;
+     represented in IGV as an arc connecting the two exons.
+
+TDF
+:    A binary, indexed summary format used by IGV to store precomputed
+     coverage/summary data at multiple resolutions.
+
+Track
+:    A single row (or set of rows) of data displayed in IGV, such as a gene
+     annotation track, an alignment track, or a variant track.
+
+VCF
+:    Variant Call Format; stores variant calls and, optionally, per-sample
+     genotypes.
