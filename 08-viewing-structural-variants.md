@@ -100,6 +100,22 @@ of chromosome 21. Select **File > Open Session…**, navigate to
 genome, the alignment file `NA19240.bam`, and jumps straight to
 `chr21:26,000,000-26,004,000` — the *APP* locus.
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## Who is NA19240?
+
+`NA19240` is a well-characterized human lymphoblastoid cell line (a
+B-lymphocyte line immortalized with Epstein-Barr virus) from a Yoruba woman
+from Ibadan, Nigeria. She is the child in one of the trios (alongside her
+parents, `NA19238` and `NA19239`) sequenced by the International HapMap
+Project and later the 1000 Genomes Project. Because her genome has been
+sequenced and validated so extensively — including as a parent-child trio,
+which lets structural variant calls be cross-checked for Mendelian
+consistency — `NA19240` is widely reused as a reference/benchmarking sample
+across genomics and sequencing-technology studies, including this one.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 Right-click on the alignments and select **View as pairs**.
 
 ![Right-click the alignments and select "View as pairs".](fig/sv-08-view-as-pairs-menu.png){alt='Right-click context menu with View as pairs highlighted'}

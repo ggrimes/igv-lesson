@@ -30,5 +30,11 @@ a VCF file.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+This lesson's exercises, slides, and sample datasets are adapted from the
+IGV team's [BroadE workshop materials][broade-2017] (Broad Institute, April
+2017) by Jim Robinson and Helga Thorvaldsdóttir. If you use IGV itself in
+published work, see [igv.org][igv-home] for the current recommended
+citations.
 
 [igv-home]: https://igv.org
+[broade-2017]: https://www.igv.org/workshops/BroadApril2017/
