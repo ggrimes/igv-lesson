@@ -1,6 +1,6 @@
 ---
 title: Viewing RNA-seq Data
-teaching: 10
+teaching: 15
 exercises: 25
 ---
 
@@ -18,8 +18,31 @@ exercises: 25
 
 - How do I see which exons are spliced together in RNA-seq data?
 - How do I compare splicing patterns between two samples or tissues?
+- Why do RNA-seq reads look different from the DNA reads in the previous
+  episode when aligned in IGV?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
+## Background: why RNA-seq alignments look "split"
+
+RNA-seq sequences mature mRNA, not genomic DNA. By the time a gene's
+pre-mRNA becomes mRNA, its introns have already been spliced out, so the
+short reads generated from it are sampled from a continuous stretch of
+joined-together exons, with no intron sequence in between.
+
+![Pre-mRNA is spliced into mRNA by removing introns and joining exons; short sequencing reads are then generated from this exon-only mRNA.](fig/rnaseq-00-splicing-diagram.png){alt='Diagram of pre-mRNA being spliced into mRNA, with short reads sampled from the spliced transcript'}
+
+The reference genome, however, still contains the introns. So when an
+RNA-seq read happens to span two exons, aligning it back to the genome
+means the aligner has to split that one read into two pieces with a gap
+between them — the gap corresponds to the intron that was removed from the
+mRNA. This is exactly the "read spanning a splice junction" you will see
+represented as a gapped alignment, and later as an arc in the splice
+junction track.
+
+![The same splicing diagram, now showing how a read spanning an exon-exon boundary appears as a gapped, split alignment when mapped back onto the genomic sequence in IGV.](fig/rnaseq-00-splicing-to-igv.png){alt='Diagram extending the splicing illustration with an arrow showing the resulting gapped alignment in IGV'}
+
+(Diagram source: [Wikipedia, RNA-Seq § Gene expression](https://en.wikipedia.org/wiki/RNA-Seq#Gene_expression).)
 
 This episode uses example RNA-seq data hosted on the IGV server, so you will
 need an internet connection.
@@ -140,6 +163,9 @@ one tissue's dominant transcript, but skipped in the other's).
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
+- RNA-seq reads come from spliced mRNA (introns already removed), so a read
+  spanning two exons aligns back to the intron-containing genome as a
+  gapped, "split" alignment.
 - Enable the splice junction track (via **View > Preferences > Alignments**)
   to see, as arcs, which exons are spliced together in RNA-seq data.
 - Compare coverage and junction tracks across samples or tissues to spot
