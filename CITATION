@@ -1,0 +1,26 @@
+This lesson's exercises, slides, and sample datasets are adapted from the
+IGV team's BroadE workshop materials:
+
+Jim Robinson, Helga Thorvaldsdottir. Introduction to the Integrative
+Genomics Viewer (IGV). BroadE Workshop, Broad Institute, April 2017.
+https://www.igv.org/workshops/BroadApril2017/
+
+If you use IGV itself (the software) in published work, please cite it as
+recommended at https://igv.org/, currently:
+
+Robinson JT, Thorvaldsdottir H, Winckler W, Guttman M, Lander ES, Getz G,
+Mesirov JP. Integrative Genomics Viewer. Nature Biotechnology 29, 24-26
+(2011).
+
+Thorvaldsdottir H, Robinson JT, Mesirov JP. Integrative Genomics Viewer
+(IGV): high-performance genomics data visualization and exploration.
+Briefings in Bioinformatics 14, 178-192 (2013).
+
+Robinson JT, Thorvaldsdottir H, Wenger AM, Zehir A, Mesirov JP. Variant
+Review with the Integrative Genomics Viewer (IGV). Cancer Research
+77(21), e31-e34 (2017).
+
+Robinson JT, Thorvaldsdottir H, Turner D, Mesirov JP. igv.js: an
+embeddable JavaScript implementation of the Integrative Genomics Viewer
+(IGV). Bioinformatics 39(1), btac830 (2023).
+https://doi.org/10.1093/bioinformatics/btac830

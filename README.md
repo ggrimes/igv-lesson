@@ -11,8 +11,14 @@ Built on [The Carpentries Workbench][sandpaper-docs] lesson template. See the
 lesson template documentation for instructions on formatting, building, and
 publishing lesson material.
 
-Exercises and example data adapted from IGV workshop materials (exercises,
-slides, and sample datasets) originally developed for the BroadE Workshop by
-Jim Robinson and Helga Thorvaldsdóttir.
+## Acknowledgments
+
+Exercises, slides, and sample datasets are adapted from the IGV team's
+BroadE workshop materials, [Introduction to the Integrative Genomics Viewer
+(IGV)](https://www.igv.org/workshops/BroadApril2017/) (Broad Institute,
+April 2017), by Jim Robinson and Helga Thorvaldsdóttir.
+
+If you use IGV itself in published work, see [igv.org](https://igv.org) for
+the current recommended citations, or [CITATION](CITATION) for a summary.
 
 [sandpaper-docs]: https://carpentries.github.io/sandpaper-docs/
