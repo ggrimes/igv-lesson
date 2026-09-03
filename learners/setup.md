@@ -20,9 +20,10 @@ This lesson uses the IGV **desktop** application (not igv.js or IGV-Web).
 
 The exercises use a small set of example genomics files (a chromosome
 sequence and index, a gene annotation file, a sample BAM alignment file, and
-a population VCF file). Download and unzip the workshop data file provided by
-your instructor (`igvData.zip`) into a convenient location, such as your
-Desktop or home directory.
+a population VCF file). Download
+[igvData.zip](https://github.com/ggrimes/igv-lesson/releases/download/data-v1/igvData.zip)
+(~95 MB) and unzip it into a convenient location, such as your Desktop or
+home directory.
 
 After unzipping, you should have a folder called `igvData` with the following
 structure:
