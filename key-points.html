@@ -320,7 +320,19 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="08-wrap-up.html">8. Wrap Up</a>
+        <a href="08-viewing-structural-variants.html">8. Viewing Structural Variants</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush10">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading10">
+        <a href="09-wrap-up.html">9. Wrap Up</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -478,15 +490,27 @@ allele); genotypes are colored grey (homozygous reference) / blue
 name.</li>
 <li>Grouping genotypes by a sample attribute (e.g. population) makes it
 easy to compare variant patterns across groups of samples.</li>
-</ul></section><section id="08-wrap-up"><h2 class="section-heading"><a href="08-wrap-up.html">Wrap Up</a></h2>
+</ul></section><section id="08-viewing-structural-variants"><h2 class="section-heading"><a href="08-viewing-structural-variants.html">Viewing Structural Variants</a></h2>
+<hr class="half-width">
+<ul>
+<li>IGV can color read pairs by inferred insert size or by orientation,
+which reveals deletions, insertions, inter-chromosomal fusions, and
+inversions without running a dedicated SV caller.</li>
+<li>A deletion shows up as pairs with a larger-than-expected insert size
+(colored red) and a coverage drop between two breakpoints.</li>
+<li>A fusion shows up as reads colored by an unexpected mate chromosome,
+clustered at the fusion junction.</li>
+<li>An inversion shows up as same-strand (forward-forward or
+reverse-reverse) discordant pairs at its two breakpoints; right-click
+<strong>View as pairs</strong> to see this clearly.</li>
+</ul></section><section id="09-wrap-up"><h2 class="section-heading"><a href="09-wrap-up.html">Wrap Up</a></h2>
 <hr class="half-width">
 <ul>
 <li>The core IGV workflow — load a genome and tracks, navigate to a
 region of interest, then use track-specific sort/color/display options —
 applies broadly across data types.</li>
-<li>IGV has many features beyond this lesson, including structural
-variant visualization, a web-embeddable sibling (igv.js), and batch
-scripting.</li>
+<li>IGV has many features beyond this lesson, including a web-embeddable
+sibling (igv.js) and batch scripting.</li>
 </ul></section>
 </div>
     </main>

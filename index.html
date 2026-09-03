@@ -271,7 +271,16 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="08-wrap-up.html">8. Wrap Up</a>
+        <a href="08-viewing-structural-variants.html">8. Viewing Structural Variants</a>
+    </div><!--/div.accordion-header-->
+
+  </div><!--/div.accordion-item-->
+</div><!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush10">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading10">
+        <a href="09-wrap-up.html">9. Wrap Up</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -375,7 +384,7 @@ lesson uses data files stored on your own computer and does not need an
 internet connection.</li>
 </ol></section><section><h2 class="section-heading" id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a></h2>
 <hr class="half-width"><p>The exercises use a small set of example genomics files (a chromosome
-sequence and index, a gene annotation file, a sample BAM alignment file,
+sequence and index, a gene annotation file, sample BAM alignment files,
 and a population VCF file). Download <a href="https://github.com/ggrimes/igv-lesson/releases/download/data-v1/igvData.zip" class="external-link">igvData.zip</a>
 (~95 MB) and unzip it into a convenient location, such as your Desktop
 or home directory.</p>
@@ -393,31 +402,24 @@ with the following structure:</p>
 │   ├── NA12878.SLX.sample.bam
 │   ├── NA12878.SLX.sample.bam.bai
 │   └── snp_calls.bed
-└── vcf/
-    ├── ALL.apol1.sample.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf
-    ├── apol1_snp131.bed
-    ├── chr22.fa
-    ├── chr22.fa.fai
-    ├── hg19_chr22.genome
-    ├── integrated_call_samples_v3.20130502.ALL.panel
-    └── vcf_session.xml</code></pre>
+├── vcf/
+│   ├── ALL.apol1.sample.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf
+│   ├── apol1_snp131.bed
+│   ├── chr22.fa
+│   ├── chr22.fa.fai
+│   ├── hg19_chr22.genome
+│   ├── integrated_call_samples_v3.20130502.ALL.panel
+│   └── vcf_session.xml
+└── svs/
+    ├── hg38_chr21.genome
+    ├── hg38.chr21.fa
+    ├── hg38.chr21.fa.fai
+    ├── NA19240.bam
+    ├── NA19240.bam.bai
+    └── svs_session.xml</code></pre>
 </div>
-<div id="optional-structural-variants-data" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
-</div>
-<span class="callout-header">Callout</span>
-<div id="optional-structural-variants-data" class="callout-inner">
-<h3 class="callout-title">Optional: structural variants data</h3>
-<div class="callout-content">
-<p>The workshop data also includes an <code>svs/</code> folder with a
-BAM file aligned against human chromosome 21 (hg38) for learners who
-want to explore structural variant signatures (discordant read pairs,
-split reads, coverage drops) on their own after the lesson. It is not
-required for any of the core episodes.</p>
-</div>
-</div>
-</div>
+<p>The <code>svs/</code> folder is used in the <a href="08-viewing-structural-variants.html">Viewing Structural
+Variants</a> episode.</p>
 <p>Keep track of where you unzipped the <code>igvData</code> folder —
 every exercise refers back to files inside it.</p>
 </section></section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">

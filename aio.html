@@ -320,7 +320,19 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="08-wrap-up.html">8. Wrap Up</a>
+        <a href="08-viewing-structural-variants.html">8. Viewing Structural Variants</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush10">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading10">
+        <a href="09-wrap-up.html">9. Wrap Up</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -1654,7 +1666,7 @@ not?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Around the first few exons of <code>SLC25A3</code>, one tissue shows
 a small “bump” of coverage — indicating a short exon or extra exonic
@@ -1724,7 +1736,7 @@ the third exon.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <p>One tissue’s junction arcs skip over the third exon entirely (an arc
 jumps directly from exon 2 to exon 4), while the other tissue’s arcs
@@ -1984,11 +1996,217 @@ easy to compare variant patterns across groups of samples.</li>
 </div>
 </div>
 </div>
-</section></section><section id="aio-08-wrap-up"><p>Content from <a href="08-wrap-up.html">Wrap Up</a></p>
+</section></section><section id="aio-08-viewing-structural-variants"><p>Content from <a href="08-viewing-structural-variants.html">Viewing Structural Variants</a></p>
 <hr>
 <p>Last updated on 2026-09-03 |
 
-        <a href="https://github.com/ggrimes/igv-lesson/edit/main/episodes/08-wrap-up.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/ggrimes/igv-lesson/edit/main/episodes/08-viewing-structural-variants.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>How can paired-end reads reveal deletions, fusions, and
+inversions?</li>
+<li>How do I confirm a candidate structural variant in IGV?</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>Explain how paired-end insert size and pair orientation can reveal
+structural variants without a dedicated SV caller.</li>
+<li>Recognize the alignment signatures of a deletion and an
+inter-chromosomal fusion.</li>
+<li>Use <strong>View as pairs</strong> to confirm an inversion
+breakpoint in real sequencing data.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="background-insert-size-and-pair-orientation">Background: insert size and pair orientation<a class="anchor" aria-label="anchor" href="#background-insert-size-and-pair-orientation"></a>
+</h2>
+<hr class="half-width">
+<p>For paired-end sequencing, each DNA fragment is read from both ends.
+When a read pair aligns to the reference genome, IGV can measure the
+<strong>inferred insert size</strong> — the distance between the outer
+edges of the two aligned mates — and compare it to the <strong>expected
+insert size</strong> for the sequencing library. It can also check
+whether the pair’s orientation (which strand each mate aligns to)
+matches what a normal, non-rearranged fragment should look like.</p>
+<figure><img src="fig/sv-01-paired-end-insert-size.png" alt="Diagram distinguishing insert size from inferred insert size" class="figure mx-auto d-block"><div class="figcaption">A read pair’s insert size (measured on the
+original fragment) versus its inferred insert size (measured after
+aligning both mates back to the reference).</div>
+</figure><p>Differences between the expected and observed insert size or
+orientation are exactly the kind of evidence dedicated structural
+variant callers look for — and you can see the same evidence directly in
+IGV, without running a caller at all.</p>
+</section><section><h2 class="section-heading" id="detecting-deletions">Detecting deletions<a class="anchor" aria-label="anchor" href="#detecting-deletions"></a>
+</h2>
+<hr class="half-width">
+<p>If the subject genome has a <strong>deletion</strong> relative to the
+reference, a read pair that happens to span the deleted region will
+still align its two mates correctly, but the <em>distance</em> between
+them on the reference will be larger than expected — because the deleted
+bases are missing from the subject, but still present in the reference
+coordinates the mates are placed in.</p>
+<p>IGV colors pairs with a larger-than-expected inferred insert size
+<strong>red</strong>, making them easy to spot:</p>
+<figure><img src="fig/sv-02-deletion-red-coloring.png" alt="Diagram showing read pairs colored red when their inferred insert size exceeds the expected value" class="figure mx-auto d-block"><div class="figcaption">Pairs with a larger-than-expected inferred
+insert size are colored red.</div>
+</figure><p>In a real dataset, this shows up as a cluster of red pairs exactly at
+the deletion’s two breakpoints, together with a visible drop in coverage
+between them:</p>
+<figure><img src="fig/sv-03-deletion-example.png" alt="IGV split-screen view showing red discordant pairs and a coverage drop at a deletion breakpoint" class="figure mx-auto d-block"><div class="figcaption">A real deletion: red discordant pairs and a
+coverage drop at both breakpoints (NA12878, chr3, split-screen
+view).</div>
+</figure></section><section><h2 class="section-heading" id="detecting-inter-chromosomal-fusions">Detecting inter-chromosomal fusions<a class="anchor" aria-label="anchor" href="#detecting-inter-chromosomal-fusions"></a>
+</h2>
+<hr class="half-width">
+<p>A <strong>fusion</strong> joins sequence from two different
+chromosomes together. Reads sequenced across the fusion junction have
+one mate on each original chromosome. IGV’s <strong>Color alignments by
+&gt; read strand/mate chromosome</strong> option colors each read by
+<em>the chromosome its mate is on</em>, using a fixed color per
+chromosome:</p>
+<figure><img src="fig/sv-04-fusion-chromosome-colors.png" alt="Chromosome color legend used for mate-chromosome coloring" class="figure mx-auto d-block"><div class="figcaption">Each read is colored by the chromosome its mate
+aligns to; IGV assigns a fixed color per chromosome.</div>
+</figure><p>In a real tumor/normal comparison, reads colored by an unexpected
+chromosome cluster right at the fusion breakpoint in the tumor sample,
+with no such evidence in the matched normal sample:</p>
+<figure><img src="fig/sv-05-fusion-example.png" alt="Split-screen view of a chr1/chr6 fusion, tumor sample showing discordant mate-chromosome coloring, normal sample showing none" class="figure mx-auto d-block"><div class="figcaption">A real inter-chromosomal fusion: reads near a
+chr1/chr6 breakpoint colored by their mate’s chromosome, visible only in
+the tumor sample.</div>
+</figure></section><section><h2 class="section-heading" id="detecting-inversions">Detecting inversions<a class="anchor" aria-label="anchor" href="#detecting-inversions"></a>
+</h2>
+<hr class="half-width">
+<p>An <strong>inversion</strong> flips the orientation of a segment of
+the genome between two breakpoints. A read pair with one mate inside the
+inverted segment and one mate outside it no longer faces its mate in the
+usual way — instead of the normal “facing inward” orientation, both
+mates end up aligned to the <em>same</em> strand (both forward, or both
+reverse). IGV’s pair-orientation coloring highlights these same-strand
+pairs, so they stand out clearly at each inversion breakpoint:</p>
+<figure><img src="fig/sv-06-inversion-orientation-diagram.png" alt="Diagram showing forward-forward and reverse-reverse discordant pair orientations at the two breakpoints of an inversion" class="figure mx-auto d-block"><div class="figcaption">At an inversion’s two breakpoints,
+discordantly-oriented pairs are colored to stand out from
+normally-oriented (grey) pairs.</div>
+</figure><p>Here is a real inversion, viewed at base-pair-scale resolution across
+the <em>APP</em> gene: a cluster of discordantly-oriented reads (colored
+teal or dark blue) and a visible drop in coverage sit right at each
+breakpoint.</p>
+<figure><img src="fig/sv-07-inversion-example.png" alt="IGV view of an inversion at the APP gene showing discordant read orientation and coverage drops at both breakpoints" class="figure mx-auto d-block"><div class="figcaption">A real inversion in the APP gene:
+discordantly-oriented reads and a coverage drop at both
+breakpoints.</div>
+</figure></section><section><h2 class="section-heading" id="hands-on-confirm-an-inversion-yourself">Hands-on: confirm an inversion yourself<a class="anchor" aria-label="anchor" href="#hands-on-confirm-an-inversion-yourself"></a>
+</h2>
+<hr class="half-width">
+<p>The workshop data includes a second sample sequenced across this same
+region of chromosome 21. Select <strong>File &gt; Open
+Session…</strong>, navigate to <code>igvData/svs/</code>, and open
+<code>svs_session.xml</code>. This loads the <code>hg38_chr21</code>
+genome, the alignment file <code>NA19240.bam</code>, and jumps straight
+to <code>chr21:26,000,000-26,004,000</code> — the <em>APP</em>
+locus.</p>
+<p>Right-click on the alignments and select <strong>View as
+pairs</strong>.</p>
+<figure><img src="fig/sv-08-view-as-pairs-menu.png" alt="Right-click context menu with View as pairs highlighted" class="figure mx-auto d-block"><div class="figcaption">Right-click the alignments and select “View as
+pairs”.</div>
+</figure><p>Once paired, look for the same signature you just saw in the demo: a
+cluster of discordantly-colored, same-strand read pairs, roughly in the
+middle of the visible region.</p>
+<figure><img src="fig/sv-09-hands-on-inversion-exercise.png" alt="IGV view of NA19240.bam at the APP locus after enabling View as pairs, showing a cluster of discordant reads" class="figure mx-auto d-block"><div class="figcaption">The resulting view: a cluster of
+discordantly-oriented reads confirms an inversion breakpoint.</div>
+</figure><div id="what-confirms-this-is-an-inversion-and-not-a-deletion" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="what-confirms-this-is-an-inversion-and-not-a-deletion" class="callout-inner">
+<h3 class="callout-title">What confirms this is an inversion, and not a
+deletion?</h3>
+<div class="callout-content">
+<p>Both a deletion and an inversion can produce a visible drop in
+coverage at their breakpoints. What <em>additional</em> piece of
+evidence, visible in this view, tells you this is specifically an
+inversion rather than a deletion?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>The <strong>coloring/orientation</strong> of the discordant reads. A
+deletion produces pairs with a larger-than-expected insert size but a
+<em>normal</em> forward/reverse orientation (colored red in this deck’s
+convention). An inversion instead produces pairs where both mates end up
+on the <em>same</em> strand relative to the reference (colored teal or
+dark blue here) — a orientation change, not just a distance change.
+Seeing same-strand pairs clustered at the breakpoints, rather than red
+long-insert pairs, is what points specifically to an inversion.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="this-is-what-sv-callers-automate" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<span class="callout-header">Callout</span>
+<div id="this-is-what-sv-callers-automate" class="callout-inner">
+<h3 class="callout-title">This is what SV callers automate</h3>
+<div class="callout-content">
+<p>Dedicated structural variant callers (e.g. Delly, Manta, Lumpy)
+formalize exactly this kind of paired-end evidence — insert size,
+orientation, and split reads — across a whole genome, and output the
+results as a VCF you could load and view the same way you did in the
+previous episode. What you just did by eye for one locus is the same
+signal those tools search for everywhere.</p>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
+<div class="callout-square">
+<i class="callout-icon" data-feather="key"></i>
+</div>
+<span class="callout-header">Key Points</span>
+<div class="callout-inner">
+<div class="callout-content">
+<ul>
+<li>IGV can color read pairs by inferred insert size or by orientation,
+which reveals deletions, insertions, inter-chromosomal fusions, and
+inversions without running a dedicated SV caller.</li>
+<li>A deletion shows up as pairs with a larger-than-expected insert size
+(colored red) and a coverage drop between two breakpoints.</li>
+<li>A fusion shows up as reads colored by an unexpected mate chromosome,
+clustered at the fusion junction.</li>
+<li>An inversion shows up as same-strand (forward-forward or
+reverse-reverse) discordant pairs at its two breakpoints; right-click
+<strong>View as pairs</strong> to see this clearly.</li>
+</ul>
+</div>
+</div>
+</div>
+</section></section><section id="aio-09-wrap-up"><p>Content from <a href="09-wrap-up.html">Wrap Up</a></p>
+<hr>
+<p>Last updated on 2026-09-03 |
+
+        <a href="https://github.com/ggrimes/igv-lesson/edit/main/episodes/09-wrap-up.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -2036,7 +2254,9 @@ visible at every zoom level,</li>
 <li>explored RNA-seq coverage, splice junctions, and Sashimi plots to
 identify alternative splicing between tissues, and</li>
 <li>explored population variant data from a VCF file, including grouping
-genotypes by sample attributes.</li>
+genotypes by sample attributes, and</li>
+<li>used paired-end insert size and pair orientation to confirm a
+structural variant (an inversion) by eye.</li>
 </ul>
 <p>These are the same core skills — load data, navigate, and use
 track-specific display options to interrogate a signal — that apply to
@@ -2046,13 +2266,10 @@ almost any data type IGV can display.</p>
 <hr class="half-width">
 <ul>
 <li>
-<strong>Structural variants.</strong> The workshop data you
-downloaded also includes an <code>svs/</code> folder with a BAM file
-aligned to human chromosome 21 (hg38). Try loading it and look for
-signatures of structural variation: clusters of reads with unexpectedly
-large or small insert sizes, reads that align in the wrong orientation
-relative to their mate, or a sudden drop in coverage partway through a
-region.</li>
+<strong>Dedicated SV callers.</strong> The previous episode showed
+you the raw evidence by eye at one locus; tools like Delly, Manta, and
+Lumpy automate the same search genome-wide and output a VCF you can load
+and view exactly as you did in <a href="07-viewing-variants.html">Viewing Variants and Genotypes</a>.</li>
 <li>
 <strong>igv.js and IGV-Web.</strong> If you want to embed genome
 browser views in a web page or share a specific view with collaborators
@@ -2099,9 +2316,8 @@ feedback from the people who work through them.</p>
 <li>The core IGV workflow — load a genome and tracks, navigate to a
 region of interest, then use track-specific sort/color/display options —
 applies broadly across data types.</li>
-<li>IGV has many features beyond this lesson, including structural
-variant visualization, a web-embeddable sibling (igv.js), and batch
-scripting.</li>
+<li>IGV has many features beyond this lesson, including a web-embeddable
+sibling (igv.js) and batch scripting.</li>
 </ul>
 </div>
 </div>

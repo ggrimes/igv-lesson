@@ -321,7 +321,19 @@
 <div class="accordion accordion-flush" id="accordionFlush9">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading9">
-        <a href="08-wrap-up.html">8. Wrap Up</a>
+        <a href="08-viewing-structural-variants.html">8. Viewing Structural Variants</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush10">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading10">
+        <a href="09-wrap-up.html">9. Wrap Up</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -575,7 +587,58 @@ names and additional metadata columns.</div>
 <p aria-hidden="true">Image 1 of 1: ‘Group By dialog and genotypes grouped by super population’</p>
 <figure><img src="../fig/variants-02-group-by-population.png" alt="Group By dialog and genotypes grouped by super population" class="figure mx-auto d-block"><div class="figcaption">Grouping genotype rows by the “super_pop” sample
 attribute to compare population groups.</div>
-</figure><hr></section><section id="08-wrap-up"><h2 class="section-heading"><a href="08-wrap-up.html">Wrap Up</a></h2>
+</figure><hr></section><section id="08-viewing-structural-variants"><h2 class="section-heading"><a href="08-viewing-structural-variants.html">Viewing Structural Variants</a></h2>
+<hr class="half-width">
+<h3 id="08-viewing-structural-variants-figure-1">Figure 1</h3>
+<p aria-hidden="true">Image 1 of 1: ‘Diagram distinguishing insert size from inferred insert size’</p>
+<figure><img src="../fig/sv-01-paired-end-insert-size.png" alt="Diagram distinguishing insert size from inferred insert size" class="figure mx-auto d-block"><div class="figcaption">A read pair’s insert size (measured on the
+original fragment) versus its inferred insert size (measured after
+aligning both mates back to the reference).</div>
+</figure><hr>
+<h3 id="08-viewing-structural-variants-figure-2">Figure 2</h3>
+<p aria-hidden="true">Image 1 of 1: ‘Diagram showing read pairs colored red when their inferred insert size exceeds the expected value’</p>
+<figure><img src="../fig/sv-02-deletion-red-coloring.png" alt="Diagram showing read pairs colored red when their inferred insert size exceeds the expected value" class="figure mx-auto d-block"><div class="figcaption">Pairs with a larger-than-expected inferred
+insert size are colored red.</div>
+</figure><hr>
+<h3 id="08-viewing-structural-variants-figure-3">Figure 3</h3>
+<p aria-hidden="true">Image 1 of 1: ‘IGV split-screen view showing red discordant pairs and a coverage drop at a deletion breakpoint’</p>
+<figure><img src="../fig/sv-03-deletion-example.png" alt="IGV split-screen view showing red discordant pairs and a coverage drop at a deletion breakpoint" class="figure mx-auto d-block"><div class="figcaption">A real deletion: red discordant pairs and a
+coverage drop at both breakpoints (NA12878, chr3, split-screen
+view).</div>
+</figure><hr>
+<h3 id="08-viewing-structural-variants-figure-4">Figure 4</h3>
+<p aria-hidden="true">Image 1 of 1: ‘Chromosome color legend used for mate-chromosome coloring’</p>
+<figure><img src="../fig/sv-04-fusion-chromosome-colors.png" alt="Chromosome color legend used for mate-chromosome coloring" class="figure mx-auto d-block"><div class="figcaption">Each read is colored by the chromosome its mate
+aligns to; IGV assigns a fixed color per chromosome.</div>
+</figure><hr>
+<h3 id="08-viewing-structural-variants-figure-5">Figure 5</h3>
+<p aria-hidden="true">Image 1 of 1: ‘Split-screen view of a chr1/chr6 fusion, tumor sample showing discordant mate-chromosome coloring, normal sample showing none’</p>
+<figure><img src="../fig/sv-05-fusion-example.png" alt="Split-screen view of a chr1/chr6 fusion, tumor sample showing discordant mate-chromosome coloring, normal sample showing none" class="figure mx-auto d-block"><div class="figcaption">A real inter-chromosomal fusion: reads near a
+chr1/chr6 breakpoint colored by their mate’s chromosome, visible only in
+the tumor sample.</div>
+</figure><hr>
+<h3 id="08-viewing-structural-variants-figure-6">Figure 6</h3>
+<p aria-hidden="true">Image 1 of 1: ‘Diagram showing forward-forward and reverse-reverse discordant pair orientations at the two breakpoints of an inversion’</p>
+<figure><img src="../fig/sv-06-inversion-orientation-diagram.png" alt="Diagram showing forward-forward and reverse-reverse discordant pair orientations at the two breakpoints of an inversion" class="figure mx-auto d-block"><div class="figcaption">At an inversion’s two breakpoints,
+discordantly-oriented pairs are colored to stand out from
+normally-oriented (grey) pairs.</div>
+</figure><hr>
+<h3 id="08-viewing-structural-variants-figure-7">Figure 7</h3>
+<p aria-hidden="true">Image 1 of 1: ‘IGV view of an inversion at the APP gene showing discordant read orientation and coverage drops at both breakpoints’</p>
+<figure><img src="../fig/sv-07-inversion-example.png" alt="IGV view of an inversion at the APP gene showing discordant read orientation and coverage drops at both breakpoints" class="figure mx-auto d-block"><div class="figcaption">A real inversion in the APP gene:
+discordantly-oriented reads and a coverage drop at both
+breakpoints.</div>
+</figure><hr>
+<h3 id="08-viewing-structural-variants-figure-8">Figure 8</h3>
+<p aria-hidden="true">Image 1 of 1: ‘Right-click context menu with View as pairs highlighted’</p>
+<figure><img src="../fig/sv-08-view-as-pairs-menu.png" alt="Right-click context menu with View as pairs highlighted" class="figure mx-auto d-block"><div class="figcaption">Right-click the alignments and select “View as
+pairs”.</div>
+</figure><hr>
+<h3 id="08-viewing-structural-variants-figure-9">Figure 9</h3>
+<p aria-hidden="true">Image 1 of 1: ‘IGV view of NA19240.bam at the APP locus after enabling View as pairs, showing a cluster of discordant reads’</p>
+<figure><img src="../fig/sv-09-hands-on-inversion-exercise.png" alt="IGV view of NA19240.bam at the APP locus after enabling View as pairs, showing a cluster of discordant reads" class="figure mx-auto d-block"><div class="figcaption">The resulting view: a cluster of
+discordantly-oriented reads confirms an inversion breakpoint.</div>
+</figure><hr></section><section id="09-wrap-up"><h2 class="section-heading"><a href="09-wrap-up.html">Wrap Up</a></h2>
 <hr class="half-width"></section>
 </div>
     </main>
