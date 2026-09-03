@@ -19,7 +19,7 @@ This lesson uses the IGV **desktop** application (not igv.js or IGV-Web).
 ## Data
 
 The exercises use a small set of example genomics files (a chromosome
-sequence and index, a gene annotation file, a sample BAM alignment file, and
+sequence and index, a gene annotation file, sample BAM alignment files, and
 a population VCF file). Download
 [igvData.zip](https://github.com/ggrimes/igv-lesson/releases/download/data-v1/igvData.zip)
 (~95 MB) and unzip it into a convenient location, such as your Desktop or
@@ -38,27 +38,26 @@ igvData/
 │   ├── NA12878.SLX.sample.bam
 │   ├── NA12878.SLX.sample.bam.bai
 │   └── snp_calls.bed
-└── vcf/
-    ├── ALL.apol1.sample.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf
-    ├── apol1_snp131.bed
-    ├── chr22.fa
-    ├── chr22.fa.fai
-    ├── hg19_chr22.genome
-    ├── integrated_call_samples_v3.20130502.ALL.panel
-    └── vcf_session.xml
+├── vcf/
+│   ├── ALL.apol1.sample.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotypes.vcf
+│   ├── apol1_snp131.bed
+│   ├── chr22.fa
+│   ├── chr22.fa.fai
+│   ├── hg19_chr22.genome
+│   ├── integrated_call_samples_v3.20130502.ALL.panel
+│   └── vcf_session.xml
+└── svs/
+    ├── hg38_chr21.genome
+    ├── hg38.chr21.fa
+    ├── hg38.chr21.fa.fai
+    ├── NA19240.bam
+    ├── NA19240.bam.bai
+    └── svs_session.xml
 ```
 
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-## Optional: structural variants data
-
-The workshop data also includes an `svs/` folder with a BAM file aligned
-against human chromosome 21 (hg38) for learners who want to explore
-structural variant signatures (discordant read pairs, split reads, coverage
-drops) on their own after the lesson. It is not required for any of the core
-episodes.
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
+The `svs/` folder is used in the
+[Viewing Structural Variants](../episodes/08-viewing-structural-variants.md)
+episode.
 
 Keep track of where you unzipped the `igvData` folder — every exercise refers
 back to files inside it.

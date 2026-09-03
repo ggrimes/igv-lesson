@@ -33,7 +33,9 @@ Across this lesson you have:
 - explored RNA-seq coverage, splice junctions, and Sashimi plots to identify
   alternative splicing between tissues, and
 - explored population variant data from a VCF file, including grouping
-  genotypes by sample attributes.
+  genotypes by sample attributes, and
+- used paired-end insert size and pair orientation to confirm a structural
+  variant (an inversion) by eye.
 
 These are the same core skills — load data, navigate, and use track-specific
 display options to interrogate a signal — that apply to almost any data type
@@ -41,12 +43,10 @@ IGV can display.
 
 ## Where to go next
 
-- **Structural variants.** The workshop data you downloaded also includes an
-  `svs/` folder with a BAM file aligned to human chromosome 21 (hg38). Try
-  loading it and look for signatures of structural variation: clusters of
-  reads with unexpectedly large or small insert sizes, reads that align in
-  the wrong orientation relative to their mate, or a sudden drop in coverage
-  partway through a region.
+- **Dedicated SV callers.** The previous episode showed you the raw evidence
+  by eye at one locus; tools like Delly, Manta, and Lumpy automate the same
+  search genome-wide and output a VCF you can load and view exactly as you
+  did in [Viewing Variants and Genotypes](07-viewing-variants.md).
 - **igv.js and IGV-Web.** If you want to embed genome browser views in a web
   page or share a specific view with collaborators without asking them to
   install anything, look at [igv.js](https://github.com/igvteam/igv.js) and
@@ -79,7 +79,7 @@ people who work through them.
 - The core IGV workflow — load a genome and tracks, navigate to a region of
   interest, then use track-specific sort/color/display options — applies
   broadly across data types.
-- IGV has many features beyond this lesson, including structural variant
-  visualization, a web-embeddable sibling (igv.js), and batch scripting.
+- IGV has many features beyond this lesson, including a web-embeddable
+  sibling (igv.js) and batch scripting.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::

@@ -11,7 +11,7 @@ have IGV installed and the workshop data downloaded (see
 unless you have build in extra time for it.
 
 Episodes 1–2 need an internet connection (they load example data from the
-IGV server). Episodes 3–5 and 7 use only local files. Episode 6 needs an
+IGV server). Episodes 3–5, 7, and 8 use only local files. Episode 6 needs an
 internet connection again for the hosted RNA-seq tutorial data.
 
 ## Pacing advice
@@ -48,6 +48,10 @@ cover the skills learners are most likely to need immediately afterward.
   — the sort/color options operate on whatever is currently centered in the
   view, so learners need to be at a high enough zoom level that the
   mismatched base is clearly visible and centered first.
+- **Forgetting "View as pairs"** in
+  [Viewing Structural Variants](../episodes/08-viewing-structural-variants.md)
+  — without it, mates are drawn as independent reads and the discordant
+  orientation signature at the inversion breakpoint is much harder to spot.
 
 ## Adapting this lesson
 
