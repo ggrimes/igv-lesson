@@ -81,6 +81,18 @@ title: 'Reference'
   an inversion; right-click alignments and select **View as pairs** to see
   pair relationships clearly.
 
+## [Viewing Long-Read Sequencing Data](../episodes/09-viewing-long-read-sequencing.md)
+
+- **View > Preferences > Alignments**: indel hiding thresholds and **Quick
+  consensus mode** filter raw long-read errors so consensus signal is
+  easier to see.
+- MAPQ (0–255) reflects alignment confidence; low MAPQ is a warning sign for
+  any variant called from that read.
+- A single long read can reveal a structural variant directly by splitting
+  across its breakpoint.
+- Color/group reads by `HP` (haplotype) tag to separate two phased alleles
+  for comparison.
+
 ## Glossary
 
 BAM
@@ -111,6 +123,10 @@ FASTA
 Genotype
 :    The specific allele(s) an individual sample carries at a variant site.
 
+Haplotype tag (HP)
+:    A BAM tag assigned by a phasing tool (e.g. WhatsHap, LongPhase) that
+     labels which parental haplotype a read belongs to.
+
 Insert size
 :    The distance spanned by a paired-end fragment, from the outer edge of
      one read to the outer edge of its mate.
@@ -130,6 +146,11 @@ Reference genome
 Sashimi plot
 :    An IGV visualization combining exon coverage and splice-junction reads
      for RNA-seq data.
+
+Split read
+:    A single sequencing read whose parts align to two different locations
+     (or orientations) in the reference, often evidence of a structural
+     variant breakpoint.
 
 Splice junction
 :    The point where two exons are joined together after intron removal;

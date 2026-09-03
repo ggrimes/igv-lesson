@@ -35,7 +35,10 @@ Across this lesson you have:
 - explored population variant data from a VCF file, including grouping
   genotypes by sample attributes, and
 - used paired-end insert size and pair orientation to confirm a structural
-  variant (an inversion) by eye.
+  variant (an inversion) by eye, and
+- if you covered the optional episode, filtered raw long-read errors and
+  used mapping quality, split reads, and haplotype tags to interpret PacBio
+  and Nanopore data.
 
 These are the same core skills — load data, navigate, and use track-specific
 display options to interrogate a signal — that apply to almost any data type
