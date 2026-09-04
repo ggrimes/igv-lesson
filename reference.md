@@ -94,8 +94,10 @@ title: 'Reference'
   it first; right-click **Link supplementary alignments** plus **Color
   alignments by > Read strand** (pink = forward, purple = reverse) reveals
   an inversion within single linked reads.
-- Color/group reads by `HP` (haplotype) tag to separate two phased alleles
-  for comparison.
+- Color/group reads by `HP` (haplotype) tag (**Color/Group alignments by >
+  Tag**, tag name `HP`) to separate two phased alleles for comparison, or to
+  tell a heterozygous structural variant (one haplotype) from a homozygous
+  one (both).
 
 ## Glossary
 

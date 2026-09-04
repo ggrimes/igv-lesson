@@ -14,10 +14,12 @@ Episodes 1–2 need an internet connection (they load example data from the
 IGV server). Episodes 3–5, 7, and 8 use only local files. Episode 6 needs an
 internet connection again for the hosted RNA-seq tutorial data. Episode 9 is
 mostly discussion/demonstration based, walking through published
-screenshots, but its hands-on section streams a public CRAM file from NCBI
-over the internet — check this works from the workshop network in advance,
-since some institutional networks block or throttle large range requests to
-external FTP/HTTPS servers.
+screenshots, but its hands-on section streams two public files from NCBI
+over the internet (a ~13 GB CRAM and a ~175 GB BAM, the latter with a
+52 MB index) — check this works from the workshop network in advance, since
+some institutional networks block or throttle large range requests to
+external FTP/HTTPS servers, and the larger index in particular may take a
+noticeably longer time to load.
 
 ## Pacing advice
 

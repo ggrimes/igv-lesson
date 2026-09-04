@@ -13,9 +13,10 @@ exercises: 15
 - Interpret mapping quality (MAPQ) when assessing a long-read alignment.
 - Recognize split reads as evidence for structural variants in long-read
   data.
-- Load a remote CRAM file directly from a public archive and use linked
+- Load remote BAM/CRAM files directly from a public archive and use linked
   supplementary alignments and strand coloring to confirm an inversion.
-- Use haplotype-tag coloring to visualize phased variants.
+- Use haplotype-tag coloring to visualize phased variants, including
+  assessing whether a structural variant is heterozygous or homozygous.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -175,21 +176,37 @@ NCBI.
   but IGV only ever requests the small portion of it covering the region
   you are viewing.)
 
-3. Type `chr20:10,804,515-10,811,999` into the search box and click **Go**.
+3. Repeat **File > Load from URL…** for a second, independently-phased
+  ultra-long nanopore dataset for the same sample, which you will use later
+  in this section:
+
+  ```output
+  https://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/data/AshkenazimTrio/HG002_NA24385_son/UCSC_Ultralong_OxfordNanopore_Promethion/HG002_GRCh38_ONT-UL_UCSC_20200508.phased.bam
+  ```
+
+  This file is much larger (its index alone is 52 MB), so this load step may
+  take a little longer — but as before, IGV still only streams the region
+  you actually view.
+
+4. Type `chr20:10,804,515-10,811,999` into the search box and click **Go**.
 
 At this zoom level you will see the same dense, indel-heavy raw signal
 described earlier in this episode — feel free to apply quick consensus mode
-here too. To reveal the structural signal underneath it:
+here too. For now, focus only on the `combined_2018-05-18` track (leave the
+second, `...phased.bam` track alone; you will come back to it). To reveal
+the structural signal underneath the noise:
 
-4. Right-click the alignments and select **Link supplementary alignments**.
-  Long reads spanning a structural variant breakpoint are often aligned as
-  a primary alignment plus one or more separate *supplementary* alignments;
-  this option draws all the pieces of one read on a single row, connected
-  by a thin line — the direct long-read equivalent of the paired-end
-  linking you used with **View as pairs** in the previous episode.
-5. Right-click again and select **Color alignments by > Read strand**.
+5. Right-click the `combined_2018-05-18` alignments and select **Link
+  supplementary alignments**. Long reads spanning a structural variant
+  breakpoint are often aligned as a primary alignment plus one or more
+  separate *supplementary* alignments; this option draws all the pieces of
+  one read on a single row, connected by a thin line — the direct long-read
+  equivalent of the paired-end linking you used with **View as pairs** in
+  the previous episode.
+6. Right-click the same track again and select **Color alignments by >
+  Read strand**.
 
-![Ultra-long nanopore reads at chr20:10,804,515-10,811,999 (HG002), linked and colored by read strand: a block of reads switches from pink (forward) to purple (reverse) and back, right where the linked lines connect split read segments.](fig/longread-09-hg002-inversion-hands-on.png){alt='IGV view of HG002 ultra-long nanopore reads at a chr20 locus, linked supplementary alignments and colored by read strand, showing a block of reverse-strand-colored reads flanked by forward-strand reads'}
+![Ultra-long nanopore reads at chr20:10,804,515-10,811,999 (HG002): the top track (`combined_2018-05-18`), linked and colored by read strand, shows a block of reads switching from pink (forward) to purple (reverse) and back. The second track below it (the phased BAM) is still in its default, unstyled appearance at this point — you will style it in the next step.](fig/longread-09-hg002-inversion-hands-on.png){alt='IGV view of HG002 ultra-long nanopore reads at a chr20 locus: the top track linked and colored by read strand showing a block of reverse-strand reads flanked by forward-strand reads, and a second, unstyled grey track below it'}
 
 Most reads across this region are colored pink (forward strand). A block of
 reads in the middle of the view, however, switches to purple (reverse
@@ -222,13 +239,53 @@ colored by strand.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-### Haplotype phasing
+### Is the inversion on one haplotype, or both?
 
-Long reads are also long enough to span multiple nearby variants on the
-*same* physical DNA molecule, which lets phasing tools (such as WhatsHap or
-LongPhase) tag each read with which parental haplotype it belongs to (the
-`HP` BAM tag). Coloring and sorting reads by `HP` groups them into their two
-haplotypes, making it easy to compare alleles side by side. In this example
+Now turn to the second track you loaded,
+`HG002_GRCh38_ONT-UL_UCSC_20200508.phased.bam`. As the name suggests, its
+reads have already been assigned to a haplotype by a phasing tool, tagged
+with the `HP` BAM attribute — exactly the kind of tag described next.
+
+7. Right-click that track and select **Color alignments by > Tag**, then
+  enter `HP` as the tag name. Optionally also **Group alignments by > Tag**
+  with the same tag, to separate the two haplotypes into clearly divided
+  blocks rather than an interleaved mix of colors.
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Heterozygous or homozygous?
+
+Compare the two haplotype groups at the same breakpoints you identified
+above. Are reads showing evidence of the inversion confined to one
+haplotype, or do both haplotypes show it? What would each answer imply
+biologically?
+
+:::::::::::::::  solution
+
+## Solution
+
+If the discordant, split/strand-switching read pattern only appears in one
+haplotype group while the other haplotype's reads look normal all the way
+through, that is evidence the inversion is **heterozygous** — present on
+only one of the two parental chromosomes. If both haplotype groups show the
+same discordant pattern, that would instead suggest a **homozygous**
+inversion, present on both chromosomes. This is exactly the kind of
+question phasing lets you answer that an unphased view cannot: an unphased
+track only tells you *that* some reads are discordant at this locus, not
+*which chromosome copy* they came from.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+### Haplotype phasing, more generally
+
+The `HP` tag you just used works because long reads are long enough to span
+multiple nearby variants on the *same* physical DNA molecule, which lets
+phasing tools (such as WhatsHap or LongPhase) tag each read with which
+parental haplotype it belongs to. Coloring and sorting reads by `HP` groups
+them into their two haplotypes, making it easy to compare alleles side by
+side — useful well beyond structural variant zygosity. In this example
 — a short tandem repeat expansion in the *FMR1* gene — one haplotype carries
 a much larger insertion than the other; grey reads could not be confidently
 assigned to either haplotype:
@@ -282,6 +339,8 @@ like Fragile X syndrome (associated with *FMR1* repeat expansions).
 - A single long read can directly reveal a structural variant by splitting
   across its breakpoint, without needing paired-end evidence.
 - Coloring and grouping reads by haplotype (`HP`) tag separates two alleles
-  for direct comparison, useful for phased variants and repeat expansions.
+  for direct comparison, useful for phased variants and repeat expansions —
+  and for telling a heterozygous structural variant (one haplotype) apart
+  from a homozygous one (both haplotypes).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
