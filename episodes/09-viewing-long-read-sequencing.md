@@ -13,6 +13,8 @@ exercises: 15
 - Interpret mapping quality (MAPQ) when assessing a long-read alignment.
 - Recognize split reads as evidence for structural variants in long-read
   data.
+- Load a remote CRAM file directly from a public archive and use linked
+  supplementary alignments and strand coloring to confirm an inversion.
 - Use haplotype-tag coloring to visualize phased variants.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -23,6 +25,8 @@ exercises: 15
 - How do I tell real signal from raw sequencing error in noisy long reads?
 - How can long reads and read phasing help interpret structural variants and
   repeat expansions?
+- Can IGV view a file that lives on a remote server, without downloading it
+  first?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -32,8 +36,8 @@ exercises: 15
 
 This is a supplementary episode — cover it only if time allows. It does not
 use the workshop's `igvData` files; instead it walks through published
-examples to introduce concepts you can apply to your own long-read data
-later.
+examples and one live hands-on exercise using public data streamed directly
+from a remote server (which needs an internet connection).
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -147,6 +151,77 @@ clinically-relevant variant:
 
 ![A 6 kb deletion, directly visible as reads whose alignment is interrupted then resumes past the deleted region; a ClinVar track (blue bars) shows this variant is already clinically annotated.](fig/longread-07-structural-variant-deletion.png){alt='IGV view of a large deletion visible via split long reads, with a ClinVar VCF annotation track'}
 
+## Hands-on: find an inversion in public long-read data
+
+You can try this yourself, on real public data, without downloading
+anything first. **File > Load from URL…** lets IGV stream just the bytes it
+needs directly from a remote server, the same way **Load from Server…**
+does for IGV's own hosted datasets.
+
+This example uses ultra-long Oxford Nanopore reads for HG002, the
+Ashkenazim trio son reference sample from the
+[Genome in a Bottle (GIAB) Consortium][giab], aligned to hg38 and hosted by
+NCBI.
+
+1. Select **Human hg38** from the genome drop-down menu.
+2. Select **File > Load from URL…** and paste:
+
+  ```output
+  https://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/data/AshkenazimTrio/HG002_NA24385_son/Ultralong_OxfordNanopore/combined_2018-05-18/combined_2018-05-18.hg38.sorted.cram
+  ```
+
+  IGV automatically finds the matching `.crai` index at the same URL — you
+  do not need to load it separately. (The CRAM file itself is over 10 GB,
+  but IGV only ever requests the small portion of it covering the region
+  you are viewing.)
+
+3. Type `chr20:10,804,515-10,811,999` into the search box and click **Go**.
+
+At this zoom level you will see the same dense, indel-heavy raw signal
+described earlier in this episode — feel free to apply quick consensus mode
+here too. To reveal the structural signal underneath it:
+
+4. Right-click the alignments and select **Link supplementary alignments**.
+  Long reads spanning a structural variant breakpoint are often aligned as
+  a primary alignment plus one or more separate *supplementary* alignments;
+  this option draws all the pieces of one read on a single row, connected
+  by a thin line — the direct long-read equivalent of the paired-end
+  linking you used with **View as pairs** in the previous episode.
+5. Right-click again and select **Color alignments by > Read strand**.
+
+![Ultra-long nanopore reads at chr20:10,804,515-10,811,999 (HG002), linked and colored by read strand: a block of reads switches from pink (forward) to purple (reverse) and back, right where the linked lines connect split read segments.](fig/longread-09-hg002-inversion-hands-on.png){alt='IGV view of HG002 ultra-long nanopore reads at a chr20 locus, linked supplementary alignments and colored by read strand, showing a block of reverse-strand-colored reads flanked by forward-strand reads'}
+
+Most reads across this region are colored pink (forward strand). A block of
+reads in the middle of the view, however, switches to purple (reverse
+strand) before switching back — exactly the same-strand-block-then-switch-back
+pattern you would expect if a segment of the genome were inverted between
+two nearby breakpoints, this time visible directly within single linked
+reads rather than needing separate discordant pairs.
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Where are the breakpoints?
+
+Using the color switch as a guide, estimate the two breakpoints of this
+inversion from the view. (For comparison: this call was originally made by
+the long-read structural variant caller Sniffles2, the same tool used for
+the deletion example earlier in this episode.)
+
+:::::::::::::::  solution
+
+## Solution
+
+The breakpoints sit wherever the read coloring switches from pink to purple
+(the first breakpoint) and back from purple to pink (the second) — at
+roughly `chr20:10,807,800` and `chr20:10,808,450` in this data. You do not
+need Sniffles2 (or any variant caller) to find this — the same visual
+evidence a caller uses is directly visible once the reads are linked and
+colored by strand.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ### Haplotype phasing
 
 Long reads are also long enough to span multiple nearby variants on the
@@ -186,6 +261,7 @@ like Fragile X syndrome (associated with *FMR1* repeat expansions).
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 [epi2me-bam]: https://epi2me.nanoporetech.com/reviewing-bam/
+[giab]: https://www.nist.gov/programs-projects/genome-bottle
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
@@ -196,6 +272,13 @@ like Fragile X syndrome (associated with *FMR1* repeat expansions).
   signal is easier to see.
 - A read's MAPQ score (0–255) reflects alignment confidence; low MAPQ is a
   warning sign for any variant called from that read.
+- **File > Load from URL…** streams a remote BAM/CRAM directly from a
+  server (finding its index automatically), without downloading the whole
+  file first.
+- **Link supplementary alignments** connects a single long read's split
+  pieces on one row; combined with **Color alignments by > Read strand**
+  (pink = forward, purple = reverse), this reveals an inversion directly
+  within individual reads.
 - A single long read can directly reveal a structural variant by splitting
   across its breakpoint, without needing paired-end evidence.
 - Coloring and grouping reads by haplotype (`HP`) tag separates two alleles

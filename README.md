@@ -22,7 +22,10 @@ The optional long-read sequencing episode also adapts examples from Oxford
 Nanopore's EPI2ME blog post, ["A guide to reviewing BAM
 files"](https://epi2me.nanoporetech.com/reviewing-bam/) by Sirisha Hesketh —
 its screenshots remain © Oxford Nanopore Technologies plc and are not
-covered by this repository's CC-BY license.
+covered by this repository's CC-BY license. That same episode's hands-on
+exercise streams public HG002 long-read data from the
+[Genome in a Bottle Consortium](https://www.nist.gov/programs-projects/genome-bottle)
+— see [CITATION](CITATION) if you reuse that data.
 
 If you use IGV itself in published work, see [igv.org](https://igv.org) for
 the current recommended citations, or [CITATION](CITATION) for a summary.

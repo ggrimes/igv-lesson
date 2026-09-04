@@ -12,9 +12,12 @@ unless you have build in extra time for it.
 
 Episodes 1–2 need an internet connection (they load example data from the
 IGV server). Episodes 3–5, 7, and 8 use only local files. Episode 6 needs an
-internet connection again for the hosted RNA-seq tutorial data. Episode 9
-uses no data at all — it is discussion/demonstration based, walking through
-published screenshots rather than a hands-on exercise.
+internet connection again for the hosted RNA-seq tutorial data. Episode 9 is
+mostly discussion/demonstration based, walking through published
+screenshots, but its hands-on section streams a public CRAM file from NCBI
+over the internet — check this works from the workshop network in advance,
+since some institutional networks block or throttle large range requests to
+external FTP/HTTPS servers.
 
 ## Pacing advice
 

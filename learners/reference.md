@@ -90,6 +90,10 @@ title: 'Reference'
   any variant called from that read.
 - A single long read can reveal a structural variant directly by splitting
   across its breakpoint.
+- **File > Load from URL…** streams a remote BAM/CRAM without downloading
+  it first; right-click **Link supplementary alignments** plus **Color
+  alignments by > Read strand** (pink = forward, purple = reverse) reveals
+  an inversion within single linked reads.
 - Color/group reads by `HP` (haplotype) tag to separate two phased alleles
   for comparison.
 
