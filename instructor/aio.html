@@ -1284,7 +1284,7 @@ lower base quality). Right-click the aligned reads and toggle
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>At <code>snp2</code>, many of the mismatched bases are drawn faintly,
 meaning IGV is shading them by low base call quality. Turning off
@@ -1332,7 +1332,7 @@ do you conclude about <code>snp2</code>?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>If the mismatched bases at <code>snp2</code> are concentrated on
 reads from only one strand, despite the library not being
@@ -1391,7 +1391,7 @@ change your confidence, and why?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>It would add a third, independent line of evidence against
 <code>snp2</code>: reads that multi-map almost equally well to many
@@ -1715,7 +1715,7 @@ not?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Around the first few exons of <code>SLC25A3</code>, one tissue shows
 a small “bump” of coverage — indicating a short exon or extra exonic
@@ -1785,7 +1785,7 @@ the third exon.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <p>One tissue’s junction arcs skip over the third exon entirely (an arc
 jumps directly from exon 2 to exon 4), while the other tissue’s arcs
@@ -2251,7 +2251,7 @@ inversion rather than a deletion?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>The <strong>coloring/orientation</strong> of the discordant reads. A
 deletion produces pairs with a larger-than-expected insert size but a
@@ -2306,7 +2306,7 @@ reverse-reverse) discordant pairs at its two breakpoints; right-click
 </div>
 </section></section><section id="aio-09-viewing-long-read-sequencing"><p>Content from <a href="09-viewing-long-read-sequencing.html">Viewing Long-Read Sequencing Data</a></p>
 <hr>
-<p>Last updated on 2026-09-03 |
+<p>Last updated on 2026-09-04 |
 
         <a href="https://github.com/ggrimes/igv-lesson/edit/main/episodes/09-viewing-long-read-sequencing.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -2327,6 +2327,8 @@ reads?</li>
 reads?</li>
 <li>How can long reads and read phasing help interpret structural
 variants and repeat expansions?</li>
+<li>Can IGV view a file that lives on a remote server, without
+downloading it first?</li>
 </ul>
 </div>
 </div>
@@ -2344,6 +2346,9 @@ reveal consensus signal.</li>
 alignment.</li>
 <li>Recognize split reads as evidence for structural variants in
 long-read data.</li>
+<li>Load a remote CRAM file directly from a public archive and use
+linked supplementary alignments and strand coloring to confirm an
+inversion.</li>
 <li>Use haplotype-tag coloring to visualize phased variants.</li>
 </ul>
 </div>
@@ -2361,8 +2366,9 @@ long-read data.</li>
 <div class="callout-content">
 <p>This is a supplementary episode — cover it only if time allows. It
 does not use the workshop’s <code>igvData</code> files; instead it walks
-through published examples to introduce concepts you can apply to your
-own long-read data later.</p>
+through published examples and one live hands-on exercise using public
+data streamed directly from a remote server (which needs an internet
+connection).</p>
 </div>
 </div>
 </div>
@@ -2430,7 +2436,7 @@ them on?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>They trade a small risk of hiding a genuine low-frequency variant for
 a much larger gain in readability: without filtering, a long-read track
@@ -2498,6 +2504,94 @@ track (blue bars) shows this variant is already clinically
 annotated.</div>
 </figure>
 </div>
+</section><section><h2 class="section-heading" id="hands-on-find-an-inversion-in-public-long-read-data">Hands-on: find an inversion in public long-read data<a class="anchor" aria-label="anchor" href="#hands-on-find-an-inversion-in-public-long-read-data"></a>
+</h2>
+<hr class="half-width">
+<p>You can try this yourself, on real public data, without downloading
+anything first. <strong>File &gt; Load from URL…</strong> lets IGV
+stream just the bytes it needs directly from a remote server, the same
+way <strong>Load from Server…</strong> does for IGV’s own hosted
+datasets.</p>
+<p>This example uses ultra-long Oxford Nanopore reads for HG002, the
+Ashkenazim trio son reference sample from the <a href="https://www.nist.gov/programs-projects/genome-bottle" class="external-link">Genome in a
+Bottle (GIAB) Consortium</a>, aligned to hg38 and hosted by NCBI.</p>
+<ol style="list-style-type: decimal">
+<li>Select <strong>Human hg38</strong> from the genome drop-down
+menu.</li>
+<li>Select <strong>File &gt; Load from URL…</strong> and paste:</li>
+</ol>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>https://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/data/AshkenazimTrio/HG002_NA24385_son/Ultralong_OxfordNanopore/combined_2018-05-18/combined_2018-05-18.hg38.sorted.cram</code></pre>
+</div>
+<p>IGV automatically finds the matching <code>.crai</code> index at the
+same URL — you do not need to load it separately. (The CRAM file itself
+is over 10 GB, but IGV only ever requests the small portion of it
+covering the region you are viewing.)</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Type <code>chr20:10,804,515-10,811,999</code> into the search box
+and click <strong>Go</strong>.</li>
+</ol>
+<p>At this zoom level you will see the same dense, indel-heavy raw
+signal described earlier in this episode — feel free to apply quick
+consensus mode here too. To reveal the structural signal underneath
+it:</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Right-click the alignments and select <strong>Link supplementary
+alignments</strong>. Long reads spanning a structural variant breakpoint
+are often aligned as a primary alignment plus one or more separate
+<em>supplementary</em> alignments; this option draws all the pieces of
+one read on a single row, connected by a thin line — the direct
+long-read equivalent of the paired-end linking you used with
+<strong>View as pairs</strong> in the previous episode.</li>
+<li>Right-click again and select <strong>Color alignments by &gt; Read
+strand</strong>.</li>
+</ol>
+<figure><img src="../fig/longread-09-hg002-inversion-hands-on.png" alt="IGV view of HG002 ultra-long nanopore reads at a chr20 locus, linked supplementary alignments and colored by read strand, showing a block of reverse-strand-colored reads flanked by forward-strand reads" class="figure mx-auto d-block"><div class="figcaption">Ultra-long nanopore reads at
+chr20:10,804,515-10,811,999 (HG002), linked and colored by read strand:
+a block of reads switches from pink (forward) to purple (reverse) and
+back, right where the linked lines connect split read segments.</div>
+</figure><p>Most reads across this region are colored pink (forward strand). A
+block of reads in the middle of the view, however, switches to purple
+(reverse strand) before switching back — exactly the
+same-strand-block-then-switch-back pattern you would expect if a segment
+of the genome were inverted between two nearby breakpoints, this time
+visible directly within single linked reads rather than needing separate
+discordant pairs.</p>
+<div id="where-are-the-breakpoints" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<span class="callout-header">Challenge</span>
+<div id="where-are-the-breakpoints" class="callout-inner">
+<h3 class="callout-title">Where are the breakpoints?</h3>
+<div class="callout-content">
+<p>Using the color switch as a guide, estimate the two breakpoints of
+this inversion from the view. (For comparison: this call was originally
+made by the long-read structural variant caller Sniffles2, the same tool
+used for the deletion example earlier in this episode.)</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<p>The breakpoints sit wherever the read coloring switches from pink to
+purple (the first breakpoint) and back from purple to pink (the second)
+— at roughly <code>chr20:10,807,800</code> and
+<code>chr20:10,808,450</code> in this data. You do not need Sniffles2
+(or any variant caller) to find this — the same visual evidence a caller
+uses is directly visible once the reads are linked and colored by
+strand.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="section level3">
 <h3 id="haplotype-phasing">Haplotype phasing<a class="anchor" aria-label="anchor" href="#haplotype-phasing"></a>
 </h3>
@@ -2528,12 +2622,12 @@ across all reads together?</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>Without phasing, you would see a mix of insertion sizes at the locus
 and have to guess whether that reflects two distinct alleles (e.g. one
@@ -2563,6 +2657,16 @@ thresholds (<strong>View &gt; Preferences &gt; Alignments</strong>)
 filter raw long-read noise so consensus signal is easier to see.</li>
 <li>A read’s MAPQ score (0–255) reflects alignment confidence; low MAPQ
 is a warning sign for any variant called from that read.</li>
+<li>
+<strong>File &gt; Load from URL…</strong> streams a remote BAM/CRAM
+directly from a server (finding its index automatically), without
+downloading the whole file first.</li>
+<li>
+<strong>Link supplementary alignments</strong> connects a single
+long read’s split pieces on one row; combined with <strong>Color
+alignments by &gt; Read strand</strong> (pink = forward, purple =
+reverse), this reveals an inversion directly within individual
+reads.</li>
 <li>A single long read can directly reveal a structural variant by
 splitting across its breakpoint, without needing paired-end
 evidence.</li>
@@ -2748,8 +2852,8 @@ sibling (igv.js) and batch scripting.</li>
   "url": "https://ggrimes.github.io/igv-lesson/instructor/aio.html",
   "identifier": "https://ggrimes.github.io/igv-lesson/instructor/aio.html",
   "dateCreated": "2026-09-03",
-  "dateModified": "2026-09-03",
-  "datePublished": "2026-09-03"
+  "dateModified": "2026-09-04",
+  "datePublished": "2026-09-04"
 }
 
   </script><script>

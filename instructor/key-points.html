@@ -527,6 +527,16 @@ thresholds (<strong>View &gt; Preferences &gt; Alignments</strong>)
 filter raw long-read noise so consensus signal is easier to see.</li>
 <li>A read’s MAPQ score (0–255) reflects alignment confidence; low MAPQ
 is a warning sign for any variant called from that read.</li>
+<li>
+<strong>File &gt; Load from URL…</strong> streams a remote BAM/CRAM
+directly from a server (finding its index automatically), without
+downloading the whole file first.</li>
+<li>
+<strong>Link supplementary alignments</strong> connects a single
+long read’s split pieces on one row; combined with <strong>Color
+alignments by &gt; Read strand</strong> (pink = forward, purple =
+reverse), this reveals an inversion directly within individual
+reads.</li>
 <li>A single long read can directly reveal a structural variant by
 splitting across its breakpoint, without needing paired-end
 evidence.</li>
@@ -591,8 +601,8 @@ sibling (igv.js) and batch scripting.</li>
   "url": "https://ggrimes.github.io/igv-lesson/instructor/key-points.html",
   "identifier": "https://ggrimes.github.io/igv-lesson/instructor/key-points.html",
   "dateCreated": "2026-09-03",
-  "dateModified": "2026-09-03",
-  "datePublished": "2026-09-03"
+  "dateModified": "2026-09-04",
+  "datePublished": "2026-09-04"
 }
 
   </script><script>
