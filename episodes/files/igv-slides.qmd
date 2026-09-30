@@ -1,0 +1,953 @@
+---
+title: "Visualizing Genomic Data with IGV"
+subtitle: "The Integrative Genomics Viewer, hands-on"
+author: "Graeme Grimes"
+format:
+  revealjs:
+    theme: [default, igv-theme.scss]
+    slide-number: c/t
+    transition: fade
+    background-transition: fade
+    progress: true
+    hash: true
+    center: false
+    width: 1280
+    height: 760
+    margin: 0.06
+    footer: "Visualizing Genomic Data with IGV"
+    embed-resources: true
+title-slide-attributes:
+  data-background-color: "#13294b"
+---
+
+## Today's plan
+
+:::: {.columns}
+::: {.column width="50%"}
+1. Introduction to IGV
+2. IGV basics
+3. Loading your own genome
+4. Alignments & SNPs
+5. Precomputing coverage
+:::
+::: {.column width="50%"}
+6. RNA-seq & splicing
+7. Variants & genotypes
+8. Structural variants
+9. Long reads [optional]{.pill}
+10. Wrap up
+:::
+::::
+
+<br>
+
+::: {.muted .small}
+Have IGV open alongside the slides — most of today is hands-on.
+:::
+
+# What is IGV? {.section-slide background-color="#13294b"}
+
+[Episode 01]{.ep-num}
+
+[What is a genome browser, and when would I use one?]{.ep-q}
+
+## A genome browser
+
+Instead of scrolling through millions of lines of text, **scroll and zoom along a chromosome** and see data line up against the reference.
+
+IGV (Broad Institute) is popular because it:
+
+- runs **locally** — your data never leaves your machine
+- reads **only the region you are viewing**, so big files load fast
+- supports dozens of **file formats**
+- stacks data as **tracks** for side-by-side comparison
+
+## Why look at your data?
+
+::: {.incremental}
+- **Spot problems early** — misaligned reads, coverage gaps, wrong reference
+- **Real signal or artifact?** — a heterozygous SNP vs. strand bias or low base quality
+- **Build confidence** before spending time on downstream analysis
+:::
+
+. . .
+
+::: {.muted .small}
+IGV *visualizes* the output of your pipelines (alignment, variant calling, …) — it does not do the processing.
+:::
+
+## What can IGV show?
+
+![](../fig/intro-01-igv-use-cases.png){.r-stretch fig-align="center"}
+
+::: {.small .muted style="text-align:center"}
+Epigenomic signal · NGS alignments · RNA-seq · Variants & genotypes — we'll see all four today
+:::
+
+## File formats we'll use
+
+| Format | Contains |
+|:-------|:---------|
+| **FASTA** (+ `.fai`) | Reference genome sequence |
+| **BED** | Genomic intervals — genes, SNP calls |
+| **BAM** (+ `.bai`) | Aligned sequencing reads |
+| **TDF** | Precomputed coverage |
+| **VCF** | Variant calls & sample genotypes |
+
+::: {.muted .small}
+Plus many more — BAM, CRAM, bigWig, GFF/GTF, …
+:::
+
+## Your turn: launch IGV {.exercise}
+
+::: {.task}
+Open IGV on your computer. You should see a genome drop-down (e.g. `Human hg19`) in the top left, a chromosome ideogram, and an empty track area.
+:::
+
+::: {.answer .fragment}
+If IGV doesn't start, check you downloaded the right build for your OS — and put up your hand!
+:::
+
+# IGV Basics {.section-slide background-color="#0f8b8d"}
+
+[Episode 02]{.ep-num}
+
+[How do I load data and move around the genome?]{.ep-q}
+
+## Load a genome and data
+
+:::: {.columns}
+::: {.column width="45%"}
+![](../fig/basics-01-load-server-data.png){height="540"}
+:::
+::: {.column width="55%"}
+1. Genome drop-down → **Human hg19**
+2. [File > Load from Server…]{.menu}
+3. Expand **Tutorials** → tick **UI Basics (Encode)**
+
+<br>
+
+Loads four ENCODE ChIP-seq tracks (histone modifications).
+
+::: {.small .muted}
+⚠️ Expand *Tutorials* — don't tick the box next to it, or you'll load everything!
+:::
+:::
+::::
+
+## More hosted genomes
+
+![](../fig/basics-08-more-hosted-genomes.png){.r-stretch fig-align="center"}
+
+::: {.small .muted style="text-align:center"}
+Genome drop-down → **More…** for bacteria, model organisms, other builds
+:::
+
+## Four zoom levels
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/basics-02-whole-genome-chromosome.png){height="540"}
+:::
+::: {.column width="58%"}
+| Level | How |
+|:--|:--|
+| **Whole genome** | Chromosome menu → **All**, or *Home* |
+| **Chromosome** | Pick **chr1**, or click **1** on the ruler |
+| **Region** | Drag on the ruler; double-click a track |
+| **Base pair** | Keep zooming, or use the zoom widget |
+
+::: {.small}
+Alt-click zooms back out
+:::
+:::
+::::
+
+## Getting around
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/basics-03-zoom-navigate.png){height="540"}
+:::
+::: {.column width="58%"}
+**Move without zooming**
+
+- Click the **cytoband** to jump
+- **Click and drag** in the data panel to scroll
+
+**Jump straight there**
+
+- Type a locus: `chr1:144,874,969-145,000,000`
+- …or a gene name: `NRAS` → **Go**
+:::
+::::
+
+## Your turn: find NRAS {.exercise}
+
+::: {.task}
+Starting from the **whole-genome** view, go to **chr1**, then search for `NRAS`.
+
+Keep zooming until you can read **individual bases**.
+:::
+
+::: {.answer .fragment}
+Search takes you to the whole gene. Drag on the ruler, double-click, or use **+** until letters appear in the sequence track.
+:::
+
+## Sequence & gene tracks
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/basics-04-sequence-gene-track.png){height="540"}
+:::
+::: {.column width="58%"}
+**Sequence track**
+
+- One base per column once zoomed in
+- Arrow → switch strand
+- Click → 3-frame translation
+
+**Gene track**
+
+- Line = intron · thick block = exon · thinner end blocks = UTRs
+- Right-click → **Collapsed / Expanded / Squished**
+:::
+::::
+
+## Your turn: gene display modes {.exercise}
+
+::: {.task}
+Go to `EGFR`. Right-click the *RefSeq genes* track and try **Collapsed**, **Expanded** and **Squished**.
+
+What is the trade-off?
+:::
+
+::: {.answer .fragment}
+**Collapsed** — compact, can't tell transcripts apart. **Expanded** — one transcript per row, easiest to read, uses the most space. **Squished** — one per row but thin: fits many, harder to read.
+:::
+
+## Combining data tracks
+
+[Tools > Combine Data Tracks]{.menu} — add, subtract, multiply or divide two numeric tracks
+
+:::: {.columns}
+::: {.column width="50%"}
+![](../fig/basics-06-combine-tracks-dialog.png)
+:::
+::: {.column width="50%"}
+![](../fig/basics-07-combine-tracks-result.png)
+:::
+::::
+
+## Your turn: combine two tracks {.exercise}
+
+::: {.task}
+Add two of the ENCODE ChIP-seq tracks together. How does the combined track compare to its two sources?
+:::
+
+::: {.answer .fragment}
+The **Sum** track peaks wherever *either* source peaks, with height equal to the total signal — one track to read instead of two.
+:::
+
+## Watch: data navigation basics
+
+{{< video https://www.youtube.com/embed/YpNg0hNUuo8 width="100%" height="560" >}}
+
+# Loading Your Own Genome {.section-slide background-color="#13294b"}
+
+[Episode 03]{.ep-num}
+
+[How do I view a genome that isn't built into IGV?]{.ep-q}
+
+## Genome from a FASTA file
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/load-genome-from-file.png){height="540"}
+:::
+::: {.column width="58%"}
+1. [File > New Session]{.menu} to clear
+2. [Genomes > Load Genome from File…]{.menu}
+3. Open `igvData/genome/chr1.fasta`
+
+<br>
+
+Now there's **no gene track** and **no cytoband** — just sequence.
+
+4. [File > Load from File…]{.menu} → `refSeq_chr1.bed`
+:::
+::::
+
+::: {.notes}
+Note the menus: Genomes menu for the genome, File menu for tracks.
+:::
+
+## Your turn: search by gene name {.exercise}
+
+::: {.task}
+**Before** loading `refSeq_chr1.bed`, search for `CAP9`. What happens?
+
+Now load the BED file and try again.
+:::
+
+::: {.answer .fragment}
+Without annotation IGV doesn't know where genes are — only coordinates work. With the BED file loaded, the search jumps straight to the gene.
+:::
+
+. . .
+
+::: {.small .muted}
+Annotation BED files like this can be downloaded from the UCSC Table Browser. Cytobands can't be added separately.
+:::
+
+# Alignments & SNPs {.section-slide background-color="#0f8b8d"}
+
+[Episode 04]{.ep-num}
+
+[How can I tell a real SNP from an artifact?]{.ep-q}
+
+## Paired-end reads
+
+![](../fig/snps-00-ngs-paired-end.png){.r-stretch fig-align="center"}
+
+::: {.small .muted style="text-align:center"}
+Each fragment is read from both ends · distance between outer edges = **insert size**
+:::
+
+## The SAM / BAM format
+
+![](../fig/snps-00-sambam-format.png){.r-stretch fig-align="center"}
+
+::: {.small .muted style="text-align:center"}
+Read name · position · **mapping quality** · **CIGAR** · mate info · sequence & base qualities
+:::
+
+## Load reads and SNP calls
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/snps-01-load-navigate.png){height="540"}
+:::
+::: {.column width="58%"}
+[File > Load from File…]{.menu} in `igvData/snps/`:
+
+- `snp_calls.bed` — two candidate SNPs
+- `NA12878.SLX.sample.bam`
+
+Search `snp1` → **Go**
+
+::: {.small .muted}
+Load only the `.bam` — IGV finds the `.bai` index automatically if it's next to it.
+:::
+:::
+::::
+
+## Sort by base
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/snps-02-sort-quality.png){height="540"}
+:::
+::: {.column width="58%"}
+- Centre the mismatch between the guide lines
+- Right-click → **Sort alignments by › base**
+- Hover the **coverage bar** for allele counts
+
+<br>
+
+**A real het SNP looks like:** a consistent mismatch in ~50% of reads, and little noise around it.
+:::
+::::
+
+## Your turn: compare snp1 & snp2 {.exercise}
+
+::: {.task}
+Go to `snp2`. Compare it with `snp1` — look at how **bright** the mismatched bases are.
+
+Toggle **Shade base by quality** off and on.
+:::
+
+::: {.answer .fragment}
+At `snp2` many mismatches are faint → **low base quality**. With shading off they look just as convincing, which is misleading. First warning sign that `snp2` isn't real.
+:::
+
+## Sort & colour by strand
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/snps-03-sort-color-strand.png){height="540"}
+:::
+::: {.column width="58%"}
+Right-click →
+
+- **Sort alignments by › read strand**
+- **Color alignments by › read strand**
+
+<br>
+
+Non-strand-specific library → expect a **50/50 split**.
+
+A real variant appears on **both** strands. On one strand only = 🚩 artifact.
+:::
+::::
+
+## Your turn: real or artifact? {.exercise}
+
+::: {.task}
+Use strand sorting and colouring on `snp2`. The library was **not** strand-specific.
+
+What do you conclude?
+:::
+
+::: {.answer .fragment}
+The mismatches sit on one strand only → likely a **false positive**. Together with the low base quality, that's two independent pieces of evidence against it.
+:::
+
+## BLAT: is the read really from here? {.stack}
+
+:::: {.columns}
+::: {.column width="50%"}
+![](../fig/snps-04-blat-investigate-peak.png){height="270"}
+
+![](../fig/snps-05-blat-read-sequence-menu.png){height="270"}
+:::
+::: {.column width="50%"}
+A suspiciously narrow coverage spike?
+
+Right-click a read → **BLAT read sequence**
+
+<br>
+
+- One clear best hit → trustworthy
+- Many hits with similar scores → **repetitive sequence**, treat with suspicion
+:::
+::::
+
+## BLAT results
+
+![](../fig/snps-06-blat-results-many-hits.png){.r-stretch fig-align="center"}
+
+::: {.small .muted style="text-align:center"}
+Many equally good hits across chromosomes → the read can't be placed confidently
+:::
+
+## Watch: sequencing data basics
+
+{{< video https://www.youtube.com/embed/E_G8z_2gTYM width="100%" height="560" >}}
+
+# Precomputing Coverage {.section-slide background-color="#13294b"}
+
+[Episode 05]{.ep-num}
+
+[Why does my coverage disappear when I zoom out?]{.ep-q}
+
+## The problem
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/coverage-01-igvtools-count.png){height="540"}
+:::
+::: {.column width="58%"}
+Zoom all the way out → *"Zoom in to see coverage"*
+
+IGV computes BAM coverage **on the fly** — too slow for a whole chromosome.
+
+**Fix:** precompute it once with igvtools
+
+1. [Tools > Run igvtools…]{.menu}
+2. Command: **Count**
+3. Input: `NA12878.SLX.sample.bam` → **Run**
+:::
+::::
+
+## Attach the TDF file
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/coverage-02-load-precomputed.png){height="540"}
+:::
+::: {.column width="58%"}
+Right-click the coverage track →
+**Load pre-computed coverage data…**
+
+Pick `NA12878.SLX.sample.bam.tdf`
+
+<br>
+
+Three coverage spikes appear across chr1 — the workshop BAM only contains reads in these regions.
+:::
+::::
+
+## Your turn: zoom back in {.exercise}
+
+::: {.task}
+Zoom in on the **leftmost** spike until you reach base-pair resolution. Where do you land?
+:::
+
+::: {.answer .fragment}
+Back at `snp1`! Same reads — the coverage is just computed differently depending on zoom level.
+:::
+
+# RNA-seq & Splicing {.section-slide background-color="#0f8b8d"}
+
+[Episode 06]{.ep-num}
+
+[How do I compare splicing between tissues?]{.ep-q}
+
+## Why RNA-seq reads look "split"
+
+![](../fig/rnaseq-00-splicing-to-igv.png){.r-stretch fig-align="center"}
+
+::: {.small .muted style="text-align:center"}
+Reads come from spliced mRNA, but the genome still has introns → a read spanning two exons aligns as a **gapped** alignment
+:::
+
+## Set up and load
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/rnaseq-01-preferences-load.png){height="540"}
+:::
+::: {.column width="58%"}
+1. [View > Preferences > Alignments]{.menu}
+   tick **Splice Junction Track**
+2. Genome **Human hg19**
+3. [File > Load from Server…]{.menu}
+   Tutorials → **RNA-Seq (Body Map)**
+
+<br>
+
+Two tissues: **heart** and **liver**
+:::
+::::
+
+## Coverage and junctions
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/rnaseq-02-jump-gene-squished.png){height="540"}
+:::
+::: {.column width="58%"}
+Search `SLC25A3`
+
+For each tissue:
+
+- **Coverage** — reads per position
+- **Junctions** — arcs joining spliced exons
+
+Right-click RefSeq Genes → **Squished** to see the isoforms
+:::
+::::
+
+## Your turn: spot the difference {.exercise}
+
+::: {.task}
+Zoom in on the **first three exons**. Is there an exon with coverage in one tissue but not the other?
+:::
+
+::: {.answer .fragment}
+Yes — one tissue has a small coverage bump (an extra exon) that is missing or much lower in the other. That's **tissue-specific alternative splicing**.
+:::
+
+## Sashimi plots
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/rnaseq-04-sashimi-plot.png){height="540"}
+:::
+::: {.column width="58%"}
+Right-click junctions → **Sashimi Plot** → tick heart & liver
+
+- **Arcs** = reads across a junction (number = read count)
+- **Peaks** = exon coverage
+
+<br>
+
+Right-click → **Set Junction Coverage Min** → `50` to hide low-count junctions
+:::
+::::
+
+## Your turn: exon 3 {.exercise}
+
+::: {.task}
+In the Sashimi plot, zoom to the 5′ end. Compare the heart and liver arcs around **exon 3**.
+:::
+
+::: {.answer .fragment}
+In one tissue an arc **skips** exon 3 (exon 2 → exon 4); in the other, arcs go into and out of exon 3. Read-level evidence that exon 3 is alternatively spliced.
+:::
+
+## Watch: RNA-seq in IGV
+
+:::: {.columns}
+::: {.column width="50%"}
+{{< video https://www.youtube.com/embed/awGN-rpLYas width="100%" height="320" >}}
+
+::: {.small .muted}
+Basics: junction track, downsampling
+:::
+:::
+::: {.column width="50%"}
+{{< video https://www.youtube.com/embed/dx9-N8b9Yj4 width="100%" height="320" >}}
+
+::: {.small .muted}
+Advanced: alternative splicing, Sashimi plots
+:::
+:::
+::::
+
+# Variants & Genotypes {.section-slide background-color="#13294b"}
+
+[Episode 07]{.ep-num}
+
+[How can I compare variants across populations?]{.ep-q}
+
+## The dataset
+
+![](../fig/variants-00-the-data.png){.r-stretch fig-align="center"}
+
+::: {.small .muted style="text-align:center"}
+1000 Genomes: chromosome 22, ~850 people from populations around the world
+:::
+
+## The APOL1 story
+
+![](../fig/variants-00-apol1-background.png){.r-stretch fig-align="center"}
+
+::: {.small .muted style="text-align:center"}
+Protects against African sleeping sickness · linked to kidney disease (Genovese *et al.*, *Science* 2010)
+:::
+
+## Load the session
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/variants-01-load-session-genotypes.png){height="540"}
+:::
+::: {.column width="58%"}
+[File > Open Session…]{.menu}
+`igvData/vcf/vcf_session.xml`
+
+Two panels:
+
+- **Variant sites** — one row
+- **Genotypes** — one row per sample
+
+A **sample info** colour bar shows metadata such as population.
+:::
+::::
+
+## Reading the colours {.pair}
+
+:::: {.columns}
+::: {.column width="50%"}
+![](../fig/variants-03-allele-color-legend.png){height="300"}
+
+**Variant sites**
+
+[]{.chip style="background:#2b50d8"} reference allele
+[]{.chip style="background:#d8322b"} alternate allele
+:::
+::: {.column width="50%"}
+![](../fig/variants-04-genotype-color-legend.png){height="300"}
+
+**Genotypes**
+
+[]{.chip style="background:#22d0e0"} homozygous alt
+[]{.chip style="background:#2b50d8"} heterozygous
+[]{.chip style="background:#c8c8c8"} homozygous ref
+:::
+::::
+
+## Group by population
+
+:::: {.columns}
+::: {.column width="42%"}
+![](../fig/variants-02-group-by-population.png){height="540"}
+:::
+::: {.column width="58%"}
+1. Search `APOL1:S342G` (gene:protein change!)
+2. Right-click genotypes → **Squished**
+3. Right-click → **Group By…** → `super_pop`
+4. Scroll through the groups
+
+::: {.small .muted}
+Sample metadata comes from a separate tab-delimited file whose first column matches the VCF sample names.
+:::
+:::
+::::
+
+## Your turn: population frequencies {.exercise}
+
+::: {.task}
+At `APOL1:S342G`, scroll through the population groups.
+
+Is the variant equally common everywhere?
+:::
+
+::: {.answer .fragment}
+No — it's absent or rare in most groups and common in **African** populations, matching the selective history of *APOL1*. Grouping makes this visible without computing any frequencies.
+:::
+
+## Watch: VCF basics
+
+{{< video https://www.youtube.com/embed/EpD2ZHM7Q8Q width="100%" height="560" >}}
+
+# Structural Variants {.section-slide background-color="#0f8b8d"}
+
+[Episode 08]{.ep-num}
+
+[How can paired-end reads reveal deletions, fusions and inversions?]{.ep-q}
+
+## Insert size & orientation
+
+![](../fig/sv-01-paired-end-insert-size.png){.r-stretch fig-align="center"}
+
+::: {.small .muted style="text-align:center"}
+Compare the **inferred** insert size and pair orientation with what we expect — the same evidence SV callers use
+:::
+
+## Deletions {.pair}
+
+:::: {.columns}
+::: {.column width="45%"}
+![](../fig/sv-02-deletion-red-coloring.png){height="420"}
+:::
+::: {.column width="55%"}
+![](../fig/sv-03-deletion-example.png){height="420"}
+:::
+::::
+
+Mates land **further apart** than expected → coloured [red]{style="color:#d8322b;font-weight:700"} · coverage drops between the breakpoints
+
+## Inter-chromosomal fusions {.pair}
+
+:::: {.columns}
+::: {.column width="40%"}
+![](../fig/sv-04-fusion-chromosome-colors.png){height="420"}
+:::
+::: {.column width="60%"}
+![](../fig/sv-05-fusion-example.png){height="420"}
+:::
+::::
+
+Reads coloured by **mate chromosome** cluster at the breakpoint — in the tumour, not the normal
+
+## Inversions {.pair}
+
+:::: {.columns}
+::: {.column width="50%"}
+![](../fig/sv-06-inversion-orientation-diagram.png){height="420"}
+:::
+::: {.column width="50%"}
+![](../fig/sv-07-inversion-example.png){height="420"}
+:::
+::::
+
+Both mates on the **same strand** (→→ or ←←) at each breakpoint — here in the *APP* gene
+
+## Hands-on: find the inversion
+
+:::: {.columns}
+::: {.column width="50%"}
+![](../fig/sv-09-hands-on-inversion-exercise.png)
+:::
+::: {.column width="50%"}
+1. [File > Open Session…]{.menu}
+   `igvData/svs/svs_session.xml`
+2. Right-click reads → **View as pairs**
+3. Look for a cluster of discordant, same-strand pairs
+
+::: {.small .muted}
+`NA19240` — a heavily studied 1000 Genomes / HapMap sample
+:::
+:::
+::::
+
+## Your turn: inversion or deletion? {.exercise}
+
+::: {.task}
+Both deletions and inversions can drop coverage at their breakpoints.
+
+What *extra* evidence in this view says **inversion**?
+:::
+
+::: {.answer .fragment}
+The **orientation** colouring. Deletions give normally-oriented pairs that are too far apart (red). Inversions give **same-strand** pairs (teal / dark blue) — a change in orientation, not just distance.
+:::
+
+. . .
+
+::: {.small .muted}
+SV callers (Delly, Manta, Lumpy) automate exactly this search genome-wide and output a VCF.
+:::
+
+# Long-Read Sequencing {.section-slide background-color="#13294b"}
+
+[Episode 09 · optional]{.ep-num}
+
+[How does IGV handle PacBio and Nanopore reads?]{.ep-q}
+
+## Long reads are noisy
+
+:::: {.columns}
+::: {.column width="50%"}
+![](../fig/longread-01-pacbio-illumina-comparison.png)
+:::
+::: {.column width="50%"}
+- **10–100 kb** reads (vs. a few hundred bp)
+- Higher **per-read** error rate
+- Errors average out in the consensus
+
+<br>
+
+PacBio (top) is covered in small indels that Illumina (bottom) doesn't show.
+:::
+::::
+
+## Filter the noise
+
+:::: {.columns}
+::: {.column width="33%"}
+![](../fig/longread-02-filtered-small-indels.png)
+
+::: {.small .muted}
+Hide small indels
+:::
+:::
+::: {.column width="33%"}
+![](../fig/longread-03-quick-consensus-mode.png)
+
+::: {.small .muted}
+Quick consensus mode
+:::
+:::
+::: {.column width="33%"}
+![](../fig/longread-04-preferences-alignments-tab.png)
+
+::: {.small .muted}
+[View > Preferences > Alignments]{.menu}
+:::
+:::
+::::
+
+::: {.fragment .small}
+**But:** filtering can hide real rare variants — always check the unfiltered view before making a call.
+:::
+
+## Mapping quality & split reads {.pair}
+
+:::: {.columns}
+::: {.column width="50%"}
+![](../fig/longread-06-simple-alignment-detail.png){height="330"}
+
+**MAPQ** (0–255): how sure is the aligner? Low single digits = 🚩
+:::
+::: {.column width="50%"}
+![](../fig/longread-07-structural-variant-deletion.png){height="330"}
+
+**Split reads**: one long read spans the whole 6 kb deletion
+:::
+::::
+
+::: {.small .muted}
+Nanopore examples © Oxford Nanopore Technologies, from EPI2ME's "A guide to reviewing BAM files"
+:::
+
+## Hands-on: stream remote data
+
+[File > Load from URL…]{.menu} — IGV fetches only the region you view (and finds the index)
+
+::: {.url}
+https://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/data/AshkenazimTrio/HG002_NA24385_son/Ultralong_OxfordNanopore/combined_2018-05-18/combined_2018-05-18.hg38.sorted.cram
+:::
+
+::: {.url}
+https://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/data/AshkenazimTrio/HG002_NA24385_son/UCSC_Ultralong_OxfordNanopore_Promethion/HG002_GRCh38_ONT-UL_UCSC_20200508.phased.bam
+:::
+
+1. Genome **Human hg38**, load both URLs
+2. Go to `chr20:10,804,515-10,811,999`
+3. On the `combined_2018-05-18` track: **Link supplementary alignments** and **Color by › Read strand**
+
+## An inversion inside single reads
+
+![](../fig/longread-09-hg002-inversion-hands-on.png){.r-stretch fig-align="center"}
+
+::: {.small style="text-align:center"}
+Reads switch from [pink (forward)]{style="color:#d6477f;font-weight:700"} to [purple (reverse)]{style="color:#7b4fb0;font-weight:700"} and back — no read pairs needed
+:::
+
+## Your turn: long-read inversion {.exercise}
+
+::: {.task}
+1. Estimate the two **breakpoints** from the colour switch.
+2. On the `phased.bam` track: **Color by › Tag** `HP` (and **Group by › Tag** `HP`). Is the inversion on **one haplotype or both**?
+:::
+
+::: {.answer .fragment}
+Breakpoints ≈ `chr20:10,807,800` and `10,808,450`. Inversion reads in only one HP group → **heterozygous**; in both → **homozygous**. Unphased data can't tell you which.
+:::
+
+## Haplotype phasing
+
+:::: {.columns}
+::: {.column width="55%"}
+![](../fig/longread-08-haplotype-phasing.png)
+:::
+::: {.column width="45%"}
+Long reads span several variants on the **same molecule** → tools like WhatsHap tag each read with its haplotype (`HP`)
+
+<br>
+
+*FMR1* repeat expansion: one allele has a small insertion, the other a **much larger** one
+
+::: {.small .muted}
+Grey = reads that couldn't be assigned
+:::
+:::
+::::
+
+# Wrap Up {.section-slide background-color="#0f8b8d"}
+
+[Episode 10]{.ep-num}
+
+## What we covered {.keypoints}
+
+- Load genomes — hosted, or your own **FASTA** + **BED**
+- Navigate: whole genome → chromosome → region → base pair
+- Sort, colour & **BLAT** reads to separate real SNPs from artifacts
+- Precompute coverage with **igvtools**
+- Splice junctions & **Sashimi plots** for alternative splicing
+- **VCF** genotypes grouped by population
+- Insert size & orientation reveal **structural variants**
+- Long reads: filtering, split reads, **haplotype phasing**
+
+## Where next?
+
+:::: {.columns}
+::: {.column width="50%"}
+**SV callers** — Delly, Manta, Lumpy → VCF you can view in IGV
+
+**igv.js & IGV-Web** — embed or share views, no install
+
+**Batch scripts** — [Tools > Run Batch Script…]{.menu} for snapshots across many loci
+:::
+::: {.column width="50%"}
+**User guide**
+<https://igv.org/doc/desktop/>
+
+**Video tutorials**
+[youtube.com/@IGVtutorials](https://www.youtube.com/@IGVtutorials)
+:::
+::::
+
+<br>
+
+::: {.muted .small}
+The core workflow is always the same: **load → navigate → sort / colour / display** to interrogate the signal.
+:::
+
+# Thank you! {.section-slide background-color="#13294b"}
+
+[Questions & feedback welcome]{.ep-q}
